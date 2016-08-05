@@ -7,7 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform, $rootScope, Storage) {
+.run(function($ionicPlatform, $ionicConfigProvider, $rootScope, Storage) {
+    $ionicConfigProvider.views.swipeBackEnabled(true);
     $rootScope.rsslist = [{
         "name": "jack003",
         "url": "http://www.jack003.com/feed.xml"
@@ -15,6 +16,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     // Storage.set('rsslist', $rootScope.rsslist);
     if (Storage.get("rsslist")) {
         $rootScope.rsslist = Storage.get("rsslist");
+        // console.log($rootScope.rsslist);
     }
 
     $ionicPlatform.ready(function() {

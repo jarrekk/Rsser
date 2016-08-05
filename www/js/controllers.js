@@ -29,6 +29,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
             json = $.xml2json(response);
             // console.log(json["#document"]["rss"]["channel"]["item"]);
             $scope.articles = json["#document"]["rss"]["channel"]["item"];
+        },
+        error: function(response) {
+            $ionicLoading.hide();
+            $ionicLoading.show({
+              template: 'Failed to get rss! Please check the rss address.',
+              duration: 3000
+            });
         }
     });
     $ionicModal.fromTemplateUrl('templates/article.html', {
