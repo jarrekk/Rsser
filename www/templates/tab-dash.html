@@ -1,0 +1,7 @@
+<ion-view view-title="Rss List">
+  <ion-content>
+    <ion-item ng-repeat="rss in rsslist track by rss.name" ui-sref="tab.detail({name:rss.name})">
+      {{ rss.name }}
+    </ion-item>
+  </ion-content>
+</ion-view>

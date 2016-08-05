@@ -1,0 +1,18 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">{{ the_article.title }}</h1>
+    <div class="buttons">
+      <button class="button button-clear button-positive" ng-click="closeArticle()">Back</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+  <div class="card">
+    <div class="item item-text-wrap">
+        <p ng-bind-html="the_article.description"></p>
+    </div>
+    <div class="item item-divider">
+      {{ rss.name }}
+    </div>
+  </div>
+  </ion-content>
+</ion-modal-view>

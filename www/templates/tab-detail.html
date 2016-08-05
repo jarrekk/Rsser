@@ -1,0 +1,7 @@
+<ion-view view-title="{{ rss.name }}">
+  <ion-content>
+    <ion-item ng-repeat="article in articles track by article.title" ng-click="goToArticle(article)">
+      {{ article.title }}
+    </ion-item>
+  </ion-content>
+</ion-view>
