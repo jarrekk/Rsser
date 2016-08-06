@@ -1,0 +1,11 @@
+<ion-view view-title="Home">
+  <ion-content>
+    <ion-list>
+    <ion-item class="item-remove-animate item-avatar" ng-repeat="rss in the_rsslist track by rss.name" type="item-text-wrap" ng-click="add_to_list(rss)">
+      <img src="{{ rss.img }}">
+      <h2>{{ rss.name }}</h2>
+      <p>{{ rss.url }}</p>
+    </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services', 'ngSanitize'])
 
-.controller('DashCtrl', function($scope, $rootScope, $ionicModal, $timeout, $cordovaToast, $ionicListDelegate, Storage, rssUtils) {
+.controller('HomeCtrl', function($scope, $rootScope, $ionicModal, $timeout, $cordovaToast, $ionicListDelegate, Storage, rssUtils) {
     $scope.add_rssData = {};
     $scope.edit_rssData = {};
 
@@ -66,8 +66,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     };
 })
 
-.controller('DetailCtrl', function($scope, $rootScope, $ionicScrollDelegate, $stateParams, $ionicLoading, $ionicModal, Storage, rssUtils) {
-    $ionicLoading.show();
+.controller('DetailCtrl', function($scope, $rootScope, $ionicScrollDelegate, $stateParams, $ionicLoading, $ionicModal, $cordovaInAppBrowser, Storage, rssUtils) {
+    $ionicLoading.show({template: '<ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'});
     $scope.rss = rssUtils.findById($rootScope.rsslist, $stateParams.id);
     $.ajax({
         url: $scope.rss.url,
@@ -83,7 +83,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
             $ionicLoading.hide();
             $ionicLoading.show({
               template: 'Failed to get rss! Please check the rss address.',
-              duration: 3000
+              duration: 1500
             });
         }
     });
@@ -100,7 +100,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
             error: function(response) {
                 $ionicLoading.show({
                   template: 'Failed to get rss! Please check the rss address.',
-                  duration: 3000
+                  duration: 1500
                 });
                 $scope.$broadcast('scroll.refreshComplete');
             }
@@ -117,14 +117,36 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     $scope.goToArticle = function(article) {
         // $scope.the_article = article;
         $scope.the_article = {
-            "description": article.description.replace(/<img/g, '$& width="100%"'),
+            // "description": article.description.replace(/<img/g, '$& width="100%"').replace(/(href="[^"]*")/, ''),
+            "description": article.description.replace(/<img/g, '$& width="100%"').replace(/href="([^"]*)"/, 'ng-click="openinbrowser(\'$1\')"'),
             "title": article.title,
             "link": article.link,
             "pubDate": article.pubDate
         };
-        // console.log($scope.the_article.description);
+        console.log($scope.the_article.description);
         $scope.article_modal.show();
         $ionicScrollDelegate.scrollTop();
     };
-
+    $scope.openinbrowser = function(url)
+    {
+     // Open cordova webview if the url is in the whitelist otherwise opens in app browser
+        $cordovaInAppBrowser.open(url, '_blank');
+    };
 })
+
+.controller('AddRsslistCtrl', function($scope, $rootScope, $ionicScrollDelegate, $state, $stateParams, $ionicLoading, $timeout, $cordovaToast, Storage) {
+    $scope.the_rsslist = $rootScope.add_rsslist[$stateParams.category];
+    $scope.add_to_list = function(rss) {
+        latest_id = $rootScope.rsslist[$rootScope.rsslist.length - 1].id;
+        rss.id = latest_id + 1;
+        $rootScope.rsslist.push(rss);
+        Storage.set("rsslist", $rootScope.rsslist);
+        // console.log($rootScope.rsslist);
+        $cordovaToast.show('Rss add success!', 'short', 'center');
+        $timeout(function () {
+            $state.go('tab.home');
+        }, 1000);
+    };
+})
+
+;

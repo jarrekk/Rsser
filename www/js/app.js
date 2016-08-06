@@ -10,8 +10,34 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 .run(function($ionicPlatform, $rootScope, Storage) {
 // .run(function($ionicPlatform, $ionicConfigProvider, $rootScope, Storage) {
     // $ionicConfigProvider.views.swipeBackEnabled(true);
+    $rootScope.add_rsslist = {
+        "news": [{
+            "img": "img/rss/ifeng.png",
+            "name": "凤凰新闻-综合资讯",
+            "url": "http://news.ifeng.com/rss/index.xml"
+        }],
+        "tech": [{
+            "img": "img/rss/cnbeta.png",
+            "name": "cnBeta",
+            "url": "http://rss.cnbeta.com/rss"
+        }],
+        "article": [{
+            "img": "img/rss/zhihu-select.png",
+            "name": "知乎精选",
+            "url": "http://zhihu.com/rss"
+        },{
+            "img": "img/rss/Tencent-cdc.png",
+            "name": "腾讯CDC",
+            "url": "http://cdc.tencent.com/feed/"
+        },{
+            "img": "img/rss/hanhan.png",
+            "name": "韩寒Blog",
+            "url": "http://blog.sina.com.cn/rss/twocold.xml"
+        }]
+    };
     $rootScope.rsslist = [{
         "id": 1,
+        "img": "img/rss/jack003.png",
         "name": "jack003",
         "url": "http://www.jack003.com/feed.xml"
     }];
@@ -52,12 +78,12 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
     // Each tab has its own nav history stack:
 
-    .state('tab.dash', {
-        url: '/dash',
+    .state('tab.home', {
+        url: '/home',
         views: {
-            'tab-dash': {
-                templateUrl: 'templates/tab-dash.html',
-                controller: 'DashCtrl'
+            'tab-home': {
+                templateUrl: 'templates/tab-home.html',
+                controller: 'HomeCtrl'
             }
         }
     })
@@ -65,7 +91,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     .state('tab.detail', {
         url: '/detail?id',
         views: {
-            'tab-dash': {
+            'tab-home': {
                 templateUrl: 'templates/tab-detail.html',
                 controller: 'DetailCtrl'
             }
@@ -91,17 +117,28 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             }
         })
 
-    .state('tab.account', {
-        url: '/account',
+    .state('tab.add', {
+        url: '/add',
         views: {
-            'tab-account': {
-                templateUrl: 'templates/tab-account.html',
-                controller: 'AccountCtrl'
+            'tab-add': {
+                templateUrl: 'templates/tab-add.html',
             }
         }
-    });
+    })
+
+    .state('tab.add_rsslist', {
+        url: '/add_rsslist?category',
+        views: {
+            'tab-add': {
+                templateUrl: 'templates/add-rsslist.html',
+                controller: 'AddRsslistCtrl'
+            }
+        }
+    })
+
+    ;
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/dash');
+    $urlRouterProvider.otherwise('/tab/home');
 
 });

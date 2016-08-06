@@ -9,6 +9,7 @@
   <div class="card">
     <div class="item item-text-wrap">
         <p ng-bind-html="the_article.description"></p>
+        <a ng-click="openinbrowser(the_article.link)"><i class="fa fa-search"></i> Read the original</a>
     </div>
     <div class="item item-divider">
       {{ rss.name }}

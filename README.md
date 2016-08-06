@@ -1,3 +1,3 @@
 # Rsser
 
-This is Feed reader for gh-pages blog.
+This is Feed reader App.
