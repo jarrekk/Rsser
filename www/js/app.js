@@ -7,9 +7,11 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform, $ionicConfigProvider, $rootScope, Storage) {
-    $ionicConfigProvider.views.swipeBackEnabled(true);
+.run(function($ionicPlatform, $rootScope, Storage) {
+// .run(function($ionicPlatform, $ionicConfigProvider, $rootScope, Storage) {
+    // $ionicConfigProvider.views.swipeBackEnabled(true);
     $rootScope.rsslist = [{
+        "id": 1,
         "name": "jack003",
         "url": "http://www.jack003.com/feed.xml"
     }];
@@ -35,7 +37,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
     // Set up the various states which the app can be in.
@@ -62,7 +63,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     })
 
     .state('tab.detail', {
-        url: '/detail?name',
+        url: '/detail?id',
         views: {
             'tab-dash': {
                 templateUrl: 'templates/tab-detail.html',

@@ -1,0 +1,24 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Edit Rss</h1>
+    <div class="buttons">
+      <button class="button button-clear button-positive" ng-click="closeEditrss()">Cancel</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="doEditrss()">
+      <div class="list">
+        <label class="item item-input">
+          <input placeholder="Rss name" type="text" ng-model="edit_rssData.name">
+        </label>
+        <label class="item item-input">
+          <!-- <span class="input-label">http://</span> -->
+          <input placeholder="Rss url" type="text" ng-model="edit_rssData.url">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Edit</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

@@ -1,7 +1,20 @@
 <ion-view view-title="Rss List">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-ios-plus-outline" menu-toggle="right" ng-click="add_rss()">
+        </button>
+    </ion-nav-buttons>
+
   <ion-content>
-    <ion-item ng-repeat="rss in rsslist track by rss.name" ui-sref="tab.detail({name:rss.name})">
+    <ion-list>
+    <ion-item class="item-remove-animate" ng-repeat="rss in rsslist track by rss.id" type="item-text-wrap" ui-sref="tab.detail({id:rss.id})">
       {{ rss.name }}
+      <ion-option-button class="button-energized" ng-click="edit_rss(rss)">
+        Edit
+      </ion-option-button>
+      <ion-option-button class="button-assertive" ng-click="delete_rss(rss)">
+        Delete
+      </ion-option-button>
     </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
