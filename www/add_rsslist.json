@@ -1,0 +1,35 @@
+{
+    "news": [{
+        "id": 1,
+        "img": "img/rss/ifeng.png",
+        "name": "凤凰新闻-综合资讯",
+        "url": "http://news.ifeng.com/rss/index.xml",
+        "type": "news"
+    }],
+    "tech": [{
+        "id": 1,
+        "img": "img/rss/cnbeta.png",
+        "name": "cnBeta",
+        "url": "http://rss.cnbeta.com/rss",
+        "type": "tech"
+    }],
+    "article": [{
+        "id": 1,
+        "img": "img/rss/zhihu-select.png",
+        "name": "知乎精选",
+        "url": "http://zhihu.com/rss",
+        "type": "article"
+    },{
+        "id": 2,
+        "img": "img/rss/Tencent-cdc.png",
+        "name": "腾讯CDC",
+        "url": "http://cdc.tencent.com/feed/",
+        "type": "article"
+    },{
+        "id": 3,
+        "img": "img/rss/hanhan.png",
+        "name": "韩寒Blog",
+        "url": "http://blog.sina.com.cn/rss/twocold.xml",
+        "type": "article"
+    }]
+}

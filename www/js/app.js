@@ -7,41 +7,31 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform, $rootScope, Storage) {
+.run(function($ionicPlatform, $rootScope, $http, Storage) {
 // .run(function($ionicPlatform, $ionicConfigProvider, $rootScope, Storage) {
     // $ionicConfigProvider.views.swipeBackEnabled(true);
-    $rootScope.add_rsslist = {
-        "news": [{
-            "img": "img/rss/ifeng.png",
-            "name": "凤凰新闻-综合资讯",
-            "url": "http://news.ifeng.com/rss/index.xml"
-        }],
-        "tech": [{
-            "img": "img/rss/cnbeta.png",
-            "name": "cnBeta",
-            "url": "http://rss.cnbeta.com/rss"
-        }],
-        "article": [{
-            "img": "img/rss/zhihu-select.png",
-            "name": "知乎精选",
-            "url": "http://zhihu.com/rss"
-        },{
-            "img": "img/rss/Tencent-cdc.png",
-            "name": "腾讯CDC",
-            "url": "http://cdc.tencent.com/feed/"
-        },{
-            "img": "img/rss/hanhan.png",
-            "name": "韩寒Blog",
-            "url": "http://blog.sina.com.cn/rss/twocold.xml"
-        }]
-    };
+    $rootScope.$on("$stateChangeSuccess",  function(event, to, toParams, from, fromParams) {
+        // $rootScope.tab = to.data.no_tab;
+    });
+
+    $http.get('add_rsslist.json').then(function (resp) {
+        $rootScope.add_rsslist = resp.data;
+        if (Storage.get("add_rsslist")) {
+            $rootScope.add_rsslist = Storage.get("add_rsslist");
+        }
+        console.log($rootScope.add_rsslist);
+    });
+
     $rootScope.rsslist = [{
         "id": 1,
         "img": "img/rss/jack003.png",
         "name": "jack003",
-        "url": "http://www.jack003.com/feed.xml"
+        "url": "http://www.jack003.com/feed.xml",
+        "type": "manual"
     }];
     // Storage.set('rsslist', $rootScope.rsslist);
+    // Storage.set('add_rsslist', {});
+    // Storage.set('add_rsslist', $rootScope.add_rsslist);
     if (Storage.get("rsslist")) {
         $rootScope.rsslist = Storage.get("rsslist");
         // console.log($rootScope.rsslist);
@@ -70,7 +60,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     $stateProvider
 
     // setup an abstract state for the tabs directive
-        .state('tab', {
+    .state('tab', {
         url: '/tab',
         abstract: true,
         templateUrl: 'templates/tabs.html'
@@ -80,20 +70,22 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
     .state('tab.home', {
         url: '/home',
+        // data: { "no_tab": false },
         views: {
             'tab-home': {
                 templateUrl: 'templates/tab-home.html',
-                controller: 'HomeCtrl'
+                controller: 'HomeCtrl',
             }
         }
     })
 
     .state('tab.detail', {
         url: '/detail?id',
+        // data: { "no_tab": false },
         views: {
             'tab-home': {
                 templateUrl: 'templates/tab-detail.html',
-                controller: 'DetailCtrl'
+                controller: 'DetailCtrl',
             }
         }
     })
@@ -119,19 +111,22 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
     .state('tab.add', {
         url: '/add',
+        // data: { "no_tab": false },
         views: {
             'tab-add': {
                 templateUrl: 'templates/tab-add.html',
+                controller: 'AddRssCtrl',
             }
         }
     })
 
     .state('tab.add_rsslist', {
         url: '/add_rsslist?category',
+        // data: { "no_tab": false },
         views: {
             'tab-add': {
                 templateUrl: 'templates/add-rsslist.html',
-                controller: 'AddRsslistCtrl'
+                controller: 'AddRsslistCtrl',
             }
         }
     })
@@ -141,4 +136,39 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/home');
 
-});
+})
+
+.directive('compile', ['$compile', function ($compile) {
+  return function(scope, element, attrs) {
+    scope.$watch(
+      function(scope) {
+        return scope.$eval(attrs.compile);
+      },
+      function(value) {
+        element.html(value);
+        $compile(element.contents())(scope);
+      }
+   )};
+  }]).controller('MyCtrl', function($scope) {
+    var str = 'hello http://www.cnn.com';
+    var urlRegEx = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-]*)?\??(?:[\-\+=&;%@\.\w]*)#?(?:[\.\!\/\\\w]*))?)/g;
+    result = str.replace(urlRegEx, "<a ng-click=\"GotoLink('$1',\'_system\')\">$1</a>");
+    $scope.GotoLink = function() { alert(); };
+    $scope.name = result;
+})
+
+.directive('hideTabs', function($rootScope) {
+  return {
+    restrict: 'A',
+    link: function($scope, $el) {
+      $scope.$on("$ionicView.beforeEnter", function () {
+        $rootScope.hideTabs = true;
+      });
+      $scope.$on("$ionicView.beforeLeave", function () {
+        $rootScope.hideTabs = false;
+      });
+    }
+  };
+})
+
+;

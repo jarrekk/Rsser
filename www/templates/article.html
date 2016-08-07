@@ -1,6 +1,6 @@
 <ion-modal-view>
   <ion-header-bar>
-    <h1 class="title">{{ the_article.title }}</h1>
+    <h1 class="title">{{ rss.name }}</h1>
     <div class="buttons">
       <button class="button button-clear button-positive" ng-click="closeArticle()">Back</button>
     </div>
@@ -8,7 +8,10 @@
   <ion-content>
   <div class="card">
     <div class="item item-text-wrap">
-        <p ng-bind-html="the_article.description"></p>
+        <h2 class="text-center">{{ the_article.title }}</h2>
+        <p class="text-center">{{ the_article.pubDate }}</p>
+        <br>
+        <p compile="the_article.description"></p>
         <a ng-click="openinbrowser(the_article.link)"><i class="fa fa-search"></i> Read the original</a>
     </div>
     <div class="item item-divider">
