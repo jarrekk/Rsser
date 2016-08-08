@@ -4,7 +4,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
 
 })
 
-.controller('HomeCtrl', function($scope, $rootScope, $ionicModal, $timeout, $cordovaToast, $ionicListDelegate, Storage, rssUtils) {
+.controller('HomeCtrl', function($scope, $rootScope, $ionicModal, $timeout, $ionicListDelegate, Storage, rssUtils) {
     $scope.edit_rssData = {};
 
     $ionicModal.fromTemplateUrl('templates/edit-rss.html', {
@@ -27,7 +27,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
         rssUtils.editbyId($rootScope.rsslist, $scope.edit_rssData.id, $scope.edit_rssData);
         Storage.set("rsslist", $rootScope.rsslist);
         // console.log($rootScope.rsslist);
-        $cordovaToast.show('Rss add success!', 'short', 'center');
+        // $cordovaToast.show('Rss add success!', 'short', 'center');
         $timeout(function () {
             $scope.closeEditrss();
             $scope.edit_rssData = {};
@@ -49,7 +49,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
         Storage.set("rsslist", $rootScope.rsslist);
         Storage.set("add_rsslist", $rootScope.add_rsslist);
         // console.log($rootScope.add_rsslist);
-        $cordovaToast.show('Rss delete success!', 'short', 'center');
+        // $cordovaToast.show('Rss delete success!', 'short', 'center');
     };
 })
 
@@ -120,10 +120,11 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     };
 })
 
-.controller('AddRsslistCtrl', function($scope, $rootScope, $ionicScrollDelegate, $state, $stateParams, $ionicLoading, $timeout, $cordovaToast, Storage, rssUtils) {
+.controller('AddRsslistCtrl', function($scope, $rootScope, $ionicScrollDelegate, $ionicActionSheet, $state, $stateParams, $ionicLoading, $timeout, Storage, rssUtils) {
     $scope.category = $stateParams.category;
     $scope.the_rsslist = $rootScope.add_rsslist[$stateParams.category];
-    $scope.add_to_list = function(rss) {
+
+    var add_to_list = function(rss) {
         var type = rss.type;
         $rootScope.add_rsslist[type] =  rssUtils.deletebyId($rootScope.add_rsslist[type], rss.id);
         console.log($rootScope.add_rsslist);
@@ -136,12 +137,33 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
         rss.id = latest_id + 1;
         $rootScope.rsslist.push(rss);
         Storage.set("rsslist", $rootScope.rsslist);
-        $cordovaToast.show('Rss add success!', 'short', 'center');
     };
 
+    $scope.show = function(rss) {
+
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+                { text: '<b>Add</b>'},
+            ],
+            titleText: rss.name,
+            cancelText: 'Cancel',
+            cancel: function() {
+                // add cancel code..
+            },
+            buttonClicked: function(index) {
+                if (index === 0) {
+                    add_to_list(rss);
+                }
+                return true;
+            }
+        });
+        $timeout(function() {
+            hideSheet();
+        }, 3500);
+    };
 })
 
-.controller('AddRssCtrl', function($scope, $rootScope, $ionicModal, $timeout, $cordovaToast, Storage) {
+.controller('AddRssCtrl', function($scope, $rootScope, $ionicModal, $timeout, $ionicActionSheet, Storage) {
     $scope.add_rssData = {};
     $ionicModal.fromTemplateUrl('templates/add-rss.html', {
         scope: $scope
@@ -156,7 +178,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     $scope.add_rss = function() {
         $scope.add_rss_modal.show();
     };
-    $scope.doAddrss = function() {
+    var doAddrss = function() {
         if ($rootScope.rsslist.length > 0) {
             latest_id = $rootScope.rsslist[$rootScope.rsslist.length - 1].id;
         } else {
@@ -167,11 +189,34 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
         $scope.add_rssData.img = "img/rss/rss.png";
         $rootScope.rsslist.push($scope.add_rssData);
         Storage.set("rsslist", $rootScope.rsslist);
-        $cordovaToast.show('Rss add success!', 'short', 'center');
+        // $cordovaToast.show('Rss add success!', 'short', 'center');
         $timeout(function () {
             $scope.closeAddrss();
             $scope.add_rssData = {};
         }, 500);
+    };
+
+    $scope.show = function() {
+
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+                { text: '<b>Add</b>'},
+            ],
+            titleText: $scope.add_rssData.name,
+            cancelText: 'Cancel',
+            cancel: function() {
+                // add cancel code..
+            },
+            buttonClicked: function(index) {
+                if (index === 0) {
+                    doAddrss();
+                }
+                return true;
+            }
+        });
+        $timeout(function() {
+            hideSheet();
+        }, 3500);
     };
 
 })
