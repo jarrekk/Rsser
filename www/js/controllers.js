@@ -1,9 +1,13 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services', 'ngSanitize'])
 
-.controller('MainCtrl', function($scope, $state, Storage) {
+.controller('MainCtrl', function($scope, $state, $ionicHistory, Storage) {
     $scope.goHome = function(version) {
         $state.go("tab.home");
         Storage.set("tour", {"version": version});
+    };
+
+    $scope.myGoBack = function() {
+        $ionicHistory.goBack();
     };
 
     $scope.data = {

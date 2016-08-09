@@ -99,7 +99,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
     .state('tab.home', {
         url: '/home',
-        // data: { "no_tab": false },
         views: {
             'tab-home': {
                 templateUrl: 'templates/tab-home.html',
@@ -110,7 +109,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
     .state('tab.detail', {
         url: '/detail?id',
-        // data: { "no_tab": false },
         views: {
             'tab-home': {
                 templateUrl: 'templates/tab-detail.html',
@@ -119,28 +117,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
     })
 
-    .state('tab.chats', {
-            url: '/chats',
-            views: {
-                'tab-chats': {
-                    templateUrl: 'templates/tab-chats.html',
-                    controller: 'ChatsCtrl'
-                }
-            }
-        })
-        .state('tab.chat-detail', {
-            url: '/chats/:chatId',
-            views: {
-                'tab-chats': {
-                    templateUrl: 'templates/chat-detail.html',
-                    controller: 'ChatDetailCtrl'
-                }
-            }
-        })
-
     .state('tab.add', {
         url: '/add',
-        // data: { "no_tab": false },
         views: {
             'tab-add': {
                 templateUrl: 'templates/tab-add.html',
@@ -151,7 +129,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
     .state('tab.add_rsslist', {
         url: '/add_rsslist?category',
-        // data: { "no_tab": false },
         views: {
             'tab-add': {
                 templateUrl: 'templates/add-rsslist.html',
