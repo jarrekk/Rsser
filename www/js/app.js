@@ -14,14 +14,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         // $rootScope.tab = to.data.no_tab;
     });
 
-    $http.get('add_rsslist.json').then(function (resp) {
-        $rootScope.add_rsslist = resp.data;
-        if (Storage.get("add_rsslist")) {
-            $rootScope.add_rsslist = Storage.get("add_rsslist");
-        }
-        console.log($rootScope.add_rsslist);
-    });
-
     $rootScope.rsslist = [{
         "id": 1,
         "img": "img/rss/jack003.png",
@@ -29,13 +21,34 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         "url": "http://www.jack003.com/feed.xml",
         "type": "manual"
     }];
-    // Storage.set('rsslist', $rootScope.rsslist);
-    // Storage.set('add_rsslist', {});
-    // Storage.set('add_rsslist', $rootScope.add_rsslist);
     if (Storage.get("rsslist")) {
         $rootScope.rsslist = Storage.get("rsslist");
-        // console.log($rootScope.rsslist);
     }
+
+    $http.get('add_rsslist.json').then(function (resp) {
+        $rootScope.add_rsslist = resp.data;
+        if (Storage.get("add_rsslist")) {
+            if (Storage.get("add_rsslist").version === $rootScope.add_rsslist.version) {
+                $rootScope.add_rsslist = Storage.get("add_rsslist");
+            } else {
+                $rootScope.rsslist = [{
+                    "id": 1,
+                    "img": "img/rss/jack003.png",
+                    "name": "jack003",
+                    "url": "http://www.jack003.com/feed.xml",
+                    "type": "manual"
+                }];
+            }
+        } else {
+            $rootScope.rsslist = [{
+                "id": 1,
+                "img": "img/rss/jack003.png",
+                "name": "jack003",
+                "url": "http://www.jack003.com/feed.xml",
+                "type": "manual"
+            }];
+        }
+    });
 
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

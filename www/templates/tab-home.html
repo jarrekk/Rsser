@@ -1,11 +1,12 @@
 <ion-view view-title="Home">
-<!--     <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-ios-plus-outline" menu-toggle="right" ng-click="add_rss()">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-ios-browsers-outline" menu-toggle="right" ng-click="data.showReorder = !data.showReorder">
+        <!-- <button class="button button-icon button-clear" ng-class="{true: 'ion-ios-browsers', false: 'ion-ios-browsers-outline'}[data.showreorder]" menu-toggle="right" ng-click="data.showReorder = !data.showReorder"> -->
         </button>
-    </ion-nav-buttons> -->
+    </ion-nav-buttons>
 
   <ion-content>
-    <ion-list>
+    <ion-list show-reorder="data.showReorder">
     <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="rss in rsslist track by rss.id" type="item-text-wrap" ui-sref="tab.detail({id:rss.id})">
       <img src="{{ rss.img }}">
       <h2>{{ rss.name }}</h2>
@@ -14,9 +15,10 @@
       <!-- <ion-option-button class="button-energized" ng-click="edit_rss(rss)">
         Edit
       </ion-option-button> -->
-      <ion-option-button class="button-assertive" ng-click="delete_rss(rss)">
+      <ion-option-button class="button-assertive" ng-click="show(rss)">
         Delete
       </ion-option-button>
+      <ion-reorder-button class="ion-navicon" on-reorder="moveItem(rss, $fromIndex, $toIndex)"></ion-reorder-button>
     </ion-item>
     </ion-list>
   </ion-content>

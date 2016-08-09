@@ -1,9 +1,52 @@
 {
+    "version": 3,
     "news": [{
         "id": 1,
         "img": "img/rss/ifeng.png",
         "name": "凤凰新闻-综合资讯",
         "url": "http://news.ifeng.com/rss/index.xml",
+        "type": "news"
+    },{
+        "id": 2,
+        "img": "img/rss/ifeng.png",
+        "name": "凤凰新闻-军事频道",
+        "url": "http://news.ifeng.com/mil/rss/index.xml",
+        "type": "news"
+    },{
+        "id": 3,
+        "img": "img/rss/ifeng.png",
+        "name": "凤凰新闻-历史频道",
+        "url": "http://news.ifeng.com/history/rss/index.xml",
+        "type": "news"
+    },{
+        "id": 4,
+        "img": "img/rss/ifeng.png",
+        "name": "凤凰新闻-大陆新闻",
+        "url": "http://news.ifeng.com/rss/mainland.xml",
+        "type": "news"
+    },{
+        "id": 5,
+        "img": "img/rss/ifeng.png",
+        "name": "凤凰新闻-台湾新闻",
+        "url": "http://news.ifeng.com/rss/taiwan.xml",
+        "type": "news"
+    },{
+        "id": 6,
+        "img": "img/rss/ifeng.png",
+        "name": "凤凰新闻-国际新闻",
+        "url": "http://news.ifeng.com/rss/world.xml",
+        "type": "news"
+    },{
+        "id": 7,
+        "img": "img/rss/ifeng.png",
+        "name": "凤凰新闻-社会新闻",
+        "url": "http://news.ifeng.com/rss/society.xml",
+        "type": "news"
+    },{
+        "id": 8,
+        "img": "img/rss/ifeng.png",
+        "name": "凤凰新闻-体育频道",
+        "url": "http://news.ifeng.com/sports/rss/index.xml",
         "type": "news"
     }],
     "tech": [{
@@ -11,6 +54,30 @@
         "img": "img/rss/cnbeta.png",
         "name": "cnBeta",
         "url": "http://rss.cnbeta.com/rss",
+        "type": "tech"
+    },{
+        "id": 2,
+        "img": "img/rss/36kr.png",
+        "name": "36Kr",
+        "url": "http://36kr.com/feed",
+        "type": "tech"
+    },{
+        "id": 3,
+        "img": "img/rss/songshuhui.png",
+        "name": "科学松鼠会",
+        "url": "http://songshuhui.net/feed",
+        "type": "tech"
+    },{
+        "id": 4,
+        "img": "img/rss/iplay.png",
+        "name": "异次元软件世界",
+        "url": "http://feed.iplaysoft.com/",
+        "type": "tech"
+    },{
+        "id": 5,
+        "img": "img/rss/lixiangshenghuo.png",
+        "name": "理想生活实验室",
+        "url": "http://www.toodaylab.com/feed",
         "type": "tech"
     }],
     "article": [{
@@ -27,6 +94,18 @@
         "type": "article"
     },{
         "id": 3,
+        "img": "img/rss/cinephilia.png",
+        "name": "Cinephilia",
+        "url": "http://cinephilia.net/feed",
+        "type": "article"
+    },{
+        "id": 4,
+        "img": "img/rss/shanghaishuping.png",
+        "name": "上海书评",
+        "url": "http://www.dfdaily.com/rss/1170.xml",
+        "type": "article"
+    },{
+        "id": 5,
         "img": "img/rss/hanhan.png",
         "name": "韩寒Blog",
         "url": "http://blog.sina.com.cn/rss/twocold.xml",
