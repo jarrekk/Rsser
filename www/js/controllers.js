@@ -2,13 +2,11 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
 
 .controller('MainCtrl', function($scope, $state) {
     $scope.data = {
-        "showreorder": false
+        "showReorder": false
     };
-    // if ($scope.data.showreorder) {
-    //     $scope.button_class = 'button button-icon button-clear ion-ios-browsers';
-    // } else {
-    //     $scope.button_class = 'button button-icon button-clear ion-ios-browsers-outline';
-    // }
+    $scope.showReorder = function() {
+        $scope.data.showReorder = !$scope.data.showReorder;
+    };
 })
 
 .controller('HomeCtrl', function($scope, $rootScope, $ionicModal, $timeout, $ionicActionSheet, $ionicListDelegate, Storage, rssUtils) {
