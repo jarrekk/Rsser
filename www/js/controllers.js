@@ -1,6 +1,11 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services', 'ngSanitize'])
 
-.controller('MainCtrl', function($scope, $state) {
+.controller('MainCtrl', function($scope, $state, Storage) {
+    $scope.goHome = function(version) {
+        $state.go("tab.home");
+        Storage.set("tour", {"version": version});
+    };
+
     $scope.data = {
         "showReorder": false
     };
@@ -10,7 +15,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
 })
 
 .controller('HomeCtrl', function($scope, $rootScope, $ionicModal, $timeout, $ionicActionSheet, $ionicListDelegate, Storage, rssUtils) {
-
     $scope.moveItem = function(rss, fromIndex, toIndex) {
         $rootScope.rsslist.splice(fromIndex, 1);
         $rootScope.rsslist.splice(toIndex, 0, rss);
@@ -63,7 +67,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     };
 
     $scope.show = function(rss) {
-
         var hideSheet = $ionicActionSheet.show({
             titleText: rss.name,
             destructiveText: 'Delete',
@@ -166,7 +169,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     };
 
     $scope.show = function(rss) {
-
         var hideSheet = $ionicActionSheet.show({
             buttons: [
                 { text: '<b>Add</b>'},
@@ -222,7 +224,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     };
 
     $scope.show = function() {
-
         var hideSheet = $ionicActionSheet.show({
             buttons: [
                 { text: '<b>Add</b>'},

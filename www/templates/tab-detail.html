@@ -1,4 +1,8 @@
 <ion-view view-title="{{ rss.name }}">
+    <ion-nav-bar class="bar-dark">
+      <ion-nav-back-button class="button-clear">
+      </ion-nav-back-button>
+    </ion-nav-bar>
   <ion-content>
     <ion-refresher pulling-text="Refresh" on-refresh="doRefresh(rss)"></ion-refresher>
     <ion-item ng-repeat="article in articles track by article.link" ng-click="goToArticle(article)">

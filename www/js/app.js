@@ -7,9 +7,20 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform, $rootScope, $http, Storage) {
+.run(function($ionicPlatform, $rootScope, $http, $state, Storage) {
 // .run(function($ionicPlatform, $ionicConfigProvider, $rootScope, Storage) {
     // $ionicConfigProvider.views.swipeBackEnabled(true);
+    $http.get('tour.json').then(function (resp) {
+        $rootScope.tour = resp.data;
+        if (Storage.get("tour")) {
+            if (Storage.get("tour").version === $rootScope.tour.version) {} else {
+                $state.go("tour");
+            }
+        } else {
+            $state.go("tour");
+        }
+    });
+
     $rootScope.$on("$stateChangeSuccess",  function(event, to, toParams, from, fromParams) {
         // $rootScope.tab = to.data.no_tab;
     });
@@ -73,6 +84,11 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     $stateProvider
 
     // setup an abstract state for the tabs directive
+    .state('tour', {
+        url: '/tour',
+        templateUrl: 'templates/tour.html',
+    })
+
     .state('tab', {
         url: '/tab',
         abstract: true,
