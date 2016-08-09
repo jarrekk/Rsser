@@ -1,8 +1,4 @@
 <ion-view view-title="{{ category | uppercase }}" hide-tabs>
-    <ion-nav-bar class="bar-dark">
-      <ion-nav-back-button class="button-clear" ng-click="myGoBack()">
-      </ion-nav-back-button>
-    </ion-nav-bar>
   <ion-content>
     <ion-list>
     <ion-item class="item-remove-animate item-avatar" ng-repeat="rss in the_rsslist track by rss.name" type="item-text-wrap" ng-click="show(rss)">
