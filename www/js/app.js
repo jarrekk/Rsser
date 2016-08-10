@@ -8,9 +8,9 @@
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform, $rootScope, $http, $state, Storage) {
-// .run(function($ionicPlatform, $ionicConfigProvider, $rootScope, Storage) {
+    // .run(function($ionicPlatform, $ionicConfigProvider, $rootScope, Storage) {
     // $ionicConfigProvider.views.swipeBackEnabled(true);
-    $http.get('tour.json').then(function (resp) {
+    $http.get('tour.json').then(function(resp) {
         $rootScope.tour = resp.data;
         if (Storage.get("tour")) {
             if (Storage.get("tour").version === $rootScope.tour.version) {} else {
@@ -22,7 +22,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     });
 
     $rootScope.backButton = true;
-    $rootScope.$on("$stateChangeSuccess",  function(event, to, toParams, from, fromParams) {
+    $rootScope.$on("$stateChangeSuccess", function(event, to, toParams, from, fromParams) {
         // $rootScope.tab = to.data.no_tab;
         if ($state.current.name === 'tab.home' || $state.current.name === 'tab.add') {
             $rootScope.hideTabs = false;
@@ -38,13 +38,13 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         "img": "img/rss/jack003.png",
         "name": "jack003",
         "url": "http://www.jack003.com/feed.xml",
-        "type": "manual"
+        "type": "blog"
     }];
     if (Storage.get("rsslist")) {
         $rootScope.rsslist = Storage.get("rsslist");
     }
 
-    $http.get('add_rsslist.json').then(function (resp) {
+    $http.get('add_rsslist.json').then(function(resp) {
         $rootScope.add_rsslist = resp.data;
         if (Storage.get("add_rsslist")) {
             if (Storage.get("add_rsslist").version === $rootScope.add_rsslist.version) {
@@ -55,7 +55,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
                     "img": "img/rss/jack003.png",
                     "name": "jack003",
                     "url": "http://www.jack003.com/feed.xml",
-                    "type": "manual"
+                    "type": "blog"
                 }];
             }
         } else {
@@ -64,7 +64,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
                 "img": "img/rss/jack003.png",
                 "name": "jack003",
                 "url": "http://www.jack003.com/feed.xml",
-                "type": "manual"
+                "type": "blog"
             }];
         }
     });
@@ -98,7 +98,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     $stateProvider
 
     // setup an abstract state for the tabs directive
-    .state('tour', {
+        .state('tour', {
         url: '/tour',
         templateUrl: 'templates/tour.html',
     })
@@ -162,28 +162,30 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     })
 
     ;
-
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/home');
 
 })
 
-.directive('compile', ['$compile', function ($compile) {
-  return function(scope, element, attrs) {
-    scope.$watch(
-      function(scope) {
-        return scope.$eval(attrs.compile);
-      },
-      function(value) {
-        element.html(value);
-        $compile(element.contents())(scope);
-      }
-   )};
-  }]).controller('MyCtrl', function($scope) {
+.directive('compile', ['$compile', function($compile) {
+    return function(scope, element, attrs) {
+        scope.$watch(
+            function(scope) {
+                return scope.$eval(attrs.compile);
+            },
+            function(value) {
+                element.html(value);
+                $compile(element.contents())(scope);
+            }
+        );
+    };
+}]).controller('MyCtrl', function($scope) {
     var str = 'hello http://www.cnn.com';
     var urlRegEx = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-]*)?\??(?:[\-\+=&;%@\.\w]*)#?(?:[\.\!\/\\\w]*))?)/g;
     result = str.replace(urlRegEx, "<a ng-click=\"GotoLink('$1',\'_system\')\">$1</a>");
-    $scope.GotoLink = function() { alert(); };
+    $scope.GotoLink = function() {
+        alert();
+    };
     $scope.name = result;
 })
 

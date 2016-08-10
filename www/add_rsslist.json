@@ -1,5 +1,5 @@
 {
-    "version": 2,
+    "version": 3,
     "news": [{
         "id": 1,
         "img": "img/rss/ifeng.png",
@@ -104,11 +104,18 @@
         "name": "上海书评",
         "url": "http://www.dfdaily.com/rss/1170.xml",
         "type": "article"
-    },{
-        "id": 5,
+    }],
+    "blog": [{
+        "id": 1,
         "img": "img/rss/hanhan.png",
         "name": "韩寒Blog",
         "url": "http://blog.sina.com.cn/rss/twocold.xml",
-        "type": "article"
+        "type": "blog"
+    },{
+        "id": 2,
+        "img": "img/rss/ruanyifeng.png",
+        "name": "阮一峰Blog",
+        "url": "http://www.ruanyifeng.com/blog/atom.xml",
+        "type": "blog"
     }]
 }
