@@ -21,8 +21,16 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
     });
 
+    $rootScope.backButton = true;
     $rootScope.$on("$stateChangeSuccess",  function(event, to, toParams, from, fromParams) {
         // $rootScope.tab = to.data.no_tab;
+        if ($state.current.name === 'tab.home' || $state.current.name === 'tab.add') {
+            $rootScope.hideTabs = false;
+            $rootScope.backButton = true;
+        } else {
+            $rootScope.hideTabs = true;
+            $rootScope.backButton = false;
+        }
     });
 
     $rootScope.rsslist = [{
@@ -76,6 +84,12 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     });
 })
 
+.config(['$ionicConfigProvider', function($ionicConfigProvider) {
+
+    $ionicConfigProvider.tabs.position('bottom'); // other values: top
+
+}])
+
 .config(function($stateProvider, $urlRouterProvider) {
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -117,6 +131,16 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
     })
 
+    .state('tab.article', {
+        url: '/article',
+        views: {
+            'tab-home': {
+                templateUrl: 'templates/tab-article.html',
+                controller: 'ArticleCtrl',
+            }
+        }
+    })
+
     .state('tab.add', {
         url: '/add',
         views: {
@@ -128,7 +152,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     })
 
     .state('tab.add_rsslist', {
-        url: '/add_rsslist?category',
+        url: '/rsslist?category',
         views: {
             'tab-add': {
                 templateUrl: 'templates/add-rsslist.html',
@@ -163,18 +187,18 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     $scope.name = result;
 })
 
-.directive('hideTabs', function($rootScope) {
-  return {
-    restrict: 'A',
-    link: function($scope, $el) {
-      $scope.$on("$ionicView.beforeEnter", function () {
-        $rootScope.hideTabs = true;
-      });
-      $scope.$on("$ionicView.beforeLeave", function () {
-        $rootScope.hideTabs = false;
-      });
-    }
-  };
-})
+// .directive('hideTabs', function($rootScope) {
+//   return {
+//     restrict: 'A',
+//     link: function($scope, $el) {
+//       $scope.$on("$ionicView.beforeEnter", function () {
+//         $rootScope.hideTabs = true;
+//       });
+//       $scope.$on("$ionicView.beforeLeave", function () {
+//         $rootScope.hideTabs = false;
+//       });
+//     }
+//   };
+// })
 
 ;

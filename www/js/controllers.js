@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services', 'ngSanitize'])
 
-.controller('MainCtrl', function($scope, $state, $ionicHistory, Storage) {
+.controller('MainCtrl', function($scope, $rootScope, $state, $ionicHistory, Storage) {
     $scope.goHome = function(version) {
         $state.go("tab.home");
         Storage.set("tour", {"version": version});
@@ -86,67 +86,94 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     };
 })
 
-.controller('DetailCtrl', function($scope, $rootScope, $compile, $ionicScrollDelegate, $stateParams, $ionicLoading, $ionicModal, $cordovaInAppBrowser, Storage, rssUtils) {
+.controller('DetailCtrl', function($scope, $rootScope, $compile, $ionicScrollDelegate, $stateParams, $http, $ionicLoading, $ionicModal, $cordovaInAppBrowser, Storage, rssUtils) {
     $ionicLoading.show({template: '<ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'});
     $scope.rss = rssUtils.findById($rootScope.rsslist, $stateParams.id);
-    $.ajax({
-        url: $scope.rss.url,
-        // cache: false,
-        dataType: 'xml',
-        success: function(response) {
-            $ionicLoading.hide();
-            json = $.xml2json(response);
-            $scope.articles = json["#document"]["rss"]["channel"]["item"];
-            // console.log($scope.articles);
-        },
-        error: function(response) {
-            $ionicLoading.hide();
-            $ionicLoading.show({
-              template: 'Failed to get rss! Please check the rss address.',
-              duration: 1500
-            });
-        }
-    });
-    $scope.doRefresh = function(rss) {
+    var url = "http://rss2json.com/api.json?callback=JSON_CALLBACK&rss_url=" + $scope.rss.url;
+    function get_articles(url) {
         $.ajax({
-            url: rss.url,
-            // cache: false,
-            dataType: 'xml',
-            success: function(response) {
-                json = $.xml2json(response);
-                $scope.articles = json["#document"]["rss"]["channel"]["item"];
-                $scope.$broadcast('scroll.refreshComplete');
+            type: "get",
+            async: false,
+            url: url,
+            dataType: "jsonp",
+            jsonp: "callback",
+            jsonpCallback: "flightHandler",
+            success: function(json) {
+                $ionicLoading.hide();
+                $scope.articles = json.items;
+                // console.log(json);
             },
-            error: function(response) {
+            error: function() {
+                $ionicLoading.hide();
                 $ionicLoading.show({
                   template: 'Failed to get rss! Please check the rss address.',
                   duration: 1500
                 });
-                $scope.$broadcast('scroll.refreshComplete');
             }
         });
+    }
+    get_articles(url);
+
+    $scope.doRefresh = function(rss) {
+        var url = "http://rss2json.com/api.json?callback=JSON_CALLBACK&rss_url=" + $scope.rss.url;
+        get_articles(url);
+        $scope.$broadcast('scroll.refreshComplete');
     };
-    $ionicModal.fromTemplateUrl('templates/article.html', {
-        scope: $scope
-    }).then(function(modal) {
-        $scope.article_modal = modal;
-    });
-    $scope.closeArticle = function() {
-        $scope.article_modal.hide();
-    };
-    $scope.goToArticle = function(article) {
-        var description = article.description.replace(/<img/g, '$& width="100%"').replace(/href="([^"]*)"/g, 'ng-click="openinbrowser(\'$1\')"');
-        $scope.the_article = {
+
+    // $.ajax({
+    //     url: $scope.rss.url,
+    //     // cache: false,
+    //     dataType: 'xml',
+    //     success: function(response) {
+    //         $ionicLoading.hide();
+    //         json = $.xml2json(response);
+    //         $scope.articles = json["#document"]["rss"]["channel"]["item"];
+    //         // console.log($scope.articles);
+    //     },
+    //     error: function(response) {
+    //         $ionicLoading.hide();
+    //         $ionicLoading.show({
+    //           template: 'Failed to get rss! Please check the rss address.',
+    //           duration: 1500
+    //         });
+    //     }
+    // });
+
+    // $ionicModal.fromTemplateUrl('templates/article.html', {
+    //     scope: $scope
+    // }).then(function(modal) {
+    //     $scope.article_modal = modal;
+    // });
+    // $scope.closeArticle = function() {
+    //     $scope.article_modal.hide();
+    // };
+    // $scope.goToArticle = function(article) {
+    //     var content = article.content.replace(/<img/g, '$& width="100%"').replace(/href="([^"]*)"/g, 'ng-click="openinbrowser(\'$1\')"');
+    //     $scope.the_article = {
+    //         // "description": article.description.replace(/<img/g, '$& width="100%"').replace(/(href="[^"]*")/g, ''),
+    //         "content": content,
+    //         "title": article.title,
+    //         "link": article.link,
+    //         "pubDate": article.pubDate.replace(/ \+.*/, '')
+    //     };
+    //     // console.log($scope.the_article.description);
+    //     $scope.article_modal.show();
+    //     $ionicScrollDelegate.scrollTop();
+    // };
+
+    $scope.broadcast_article = function(article) {
+        var content = article.content.replace(/<img/g, '$& width="100%"').replace(/href="([^"]*)"/g, 'ng-click="openinbrowser(\'$1\')"');
+        $rootScope.the_article = {
             // "description": article.description.replace(/<img/g, '$& width="100%"').replace(/(href="[^"]*")/g, ''),
-            "description": description,
+            "content": content,
             "title": article.title,
             "link": article.link,
             "pubDate": article.pubDate.replace(/ \+.*/, '')
         };
-        // console.log($scope.the_article.description);
-        $scope.article_modal.show();
-        $ionicScrollDelegate.scrollTop();
     };
+})
+
+.controller('ArticleCtrl', function($scope, $cordovaInAppBrowser) {
     $scope.openinbrowser = function(url)
     {
         $cordovaInAppBrowser.open(url, '_system');

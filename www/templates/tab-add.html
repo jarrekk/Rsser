@@ -1,39 +1,31 @@
 <ion-view view-title="Add">
   <ion-content>
     <div class="row">
-      <div class="col-50">
-          <div class="card">
-              <a class="item item-text-wrap item-icon-top text-center" ui-sref="tab.add_rsslist({category:'news'})">
-                <i class="fa fa-newspaper-o"></i>
-                <h2>News</h2>
-              </a>
-          </div>
+    <div class="col-50">
+      <a class="button button-large button-calm item text-center button-full" ui-sref="tab.add_rsslist({category:'news'})" style="display:block;margin:0px;">
+        <i class="fa fa-newspaper-o"></i>
+        <h2>News</h2>
+      </a>
       </div>
       <div class="col-50">
-          <div class="card">
-              <a class="item item-text-wrap item-icon-top text-center" ui-sref="tab.add_rsslist({category:'tech'})">
-                <i class="fa fa-github-alt"></i>
-                <h2>Technology</h2>
-              </a>
-          </div>
+      <a class="button button-large button-balanced item text-center button-full" ui-sref="tab.add_rsslist({category:'tech'})" style="display:block;margin:0px;">
+        <i class="fa fa-github-alt"></i>
+        <h2>Technology</h2>
+      </a>
       </div>
     </div>
     <div class="row">
-      <div class="col-50">
-          <div class="card">
-              <a class="item item-text-wrap item-icon-top text-center" ui-sref="tab.add_rsslist({category:'article'})">
-                <i class="fa fa-pencil"></i>
-                <h2>Article</h2>
-              </a>
-          </div>
+    <div class="col-50">
+      <a class="button button-large button-balanced item text-center button-full" ui-sref="tab.add_rsslist({category:'article'})" style="display:block;margin:0px;">
+        <i class="fa fa-pencil"></i>
+        <h2>Article</h2>
+      </a>
       </div>
       <div class="col-50">
-          <div class="card">
-              <a class="item item-text-wrap item-icon-top text-center" ng-click="add_rss()">
-                <i class="fa fa-hand-paper-o"></i>
-                <h2>Manual</h2>
-              </a>
-          </div>
+      <a class="button button-large button-calm item text-center button-full" ng-click="add_rss()" style="display:block;margin:0px;">
+        <i class="fa fa-hand-paper-o"></i>
+        <h2>Manual</h2>
+      </a>
       </div>
     </div>
   </ion-content>

@@ -1,17 +1,19 @@
-<ion-view view-title="Welcome to Rsser" id="tour-view">
-  <ion-slide-box show-pager="true">
-    <ion-slide style="background-color: #00FF7F">
+<ion-view id="tour-view" hide-nav-bar="true">
+    <!-- <ion-nav-bar class="bar nav-class">
+    </ion-nav-bar> -->
+  <ion-slide-box show-pager="true" scroll="false">
+    <ion-slide class="calm slide-class">
       <span class="icon icon-slide ion-document-text"></span>
-      <h3>Clean no ads</h3>
+      <h3>Clean and no ads</h3>
     </ion-slide>
-    <ion-slide style="background-color: #4169E1">
-      <span class="icon icon-slide ion-ios-unlocked-outline"></span>
+    <ion-slide class="balanced slide-class">
+      <span class="icon icon-slide ion-unlocked"></span>
       <h3>Free read Free add</h3>
     </ion-slide>
-    <ion-slide style="background-color: #F08080">
+    <ion-slide class="assertive slide-class">
       <span class="icon icon-slide ion-happy-outline"></span>
       <h3>This is your news center</h3>
-      <button class="button button-light button-outline" ng-click="goHome(tour.version)">Enjoy it!</button>
+      <button class="button button-dark button-outline" ng-click="goHome(tour.version)">Enjoy it!</button>
     </ion-slide>
   </ion-slide-box>
 </ion-view>

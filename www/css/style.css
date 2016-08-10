@@ -15,3 +15,13 @@
   font-size: 20em;
   display: inline-block;
 }
+.nav-class{
+  background: #F0FFFF !important
+}
+.slide-class{
+    background: #F0FFFF
+}
+.a-box{
+  display: block;
+  margin: 0px;
+}
