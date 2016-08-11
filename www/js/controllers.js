@@ -146,32 +146,38 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
         Wechat.isInstalled(function (installed) {
             var link = article.link;
             var title = article.title;
-            console.log(title);
-            console.log("Wechat installed: " + (installed ? "Yes" : "No"));
-            Wechat.share({
-                message: {
-                    title: title,
-                    description: "Shred from Rsser",
-                    mediaTagName: "Rsser",
-                    thumb: "https://mmbiz.qlogo.cn/mmbiz/ibyYtkPq9m4o8Hyt9XrIPbiciauPQuZQLPjoHX12ohfV9ZEWPh5XciaZyficsCV8GCjdPTqgia9tVvd01RjbtgiaZBOXQ/0?wx_fmt=png",
-                    media: {
-                        type: Wechat.Type.WEBPAGE,   // webpage
-                        webpageUrl: link    // webpage
-                    }
-                },
-                // text: title + "-" + link + "-" + "Shared from Rsser",
-                scene: Wechat.Scene.TIMELINE   // share to Timeline
-            }, function () {
+            console.log(installed);
+            if (installed) {
+                Wechat.share({
+                    message: {
+                        title: title,
+                        description: "Shred from Rsser",
+                        mediaTagName: "Rsser",
+                        thumb: "https://mmbiz.qlogo.cn/mmbiz/ibyYtkPq9m4o8Hyt9XrIPbiciauPQuZQLPjoHX12ohfV9ZEWPh5XciaZyficsCV8GCjdPTqgia9tVvd01RjbtgiaZBOXQ/0?wx_fmt=png",
+                        media: {
+                            type: Wechat.Type.WEBPAGE,   // webpage
+                            webpageUrl: link    // webpage
+                        }
+                    },
+                    // text: title + "-" + link + "-" + "Shared from Rsser",
+                    scene: Wechat.Scene.TIMELINE   // share to Timeline
+                }, function () {
+                    $ionicLoading.show({
+                        template: 'Share success!',
+                        duration: 1500
+                    });
+                }, function (reason) {
+                    $ionicLoading.show({
+                        template: reason,
+                        duration: 1500
+                    });
+                });
+            } else {
                 $ionicLoading.show({
-                    template: 'Share success!',
+                    template: "Wechat is not installed!",
                     duration: 1500
                 });
-            }, function (reason) {
-                $ionicLoading.show({
-                    template: reason,
-                    duration: 1500
-                });
-            });
+            }
         });
     };
 })
