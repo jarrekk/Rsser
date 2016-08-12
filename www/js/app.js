@@ -21,10 +21,16 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
     });
 
+    if (Storage.get('save_traffic')) {
+        $rootScope.save_traffic = Storage.get('save_traffic');
+    } else {
+        $rootScope.save_traffic = false;
+    }
+
     $rootScope.backButton = true;
     $rootScope.$on("$stateChangeSuccess", function(event, to, toParams, from, fromParams) {
         // $rootScope.tab = to.data.no_tab;
-        if ($state.current.name === 'tab.home' || $state.current.name === 'tab.add') {
+        if ($state.current.name === 'tab.home' || $state.current.name === 'tab.add' || $state.current.name === 'tab.config') {
             $rootScope.hideTabs = false;
             $rootScope.backButton = true;
         } else {
@@ -157,6 +163,37 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             'tab-add': {
                 templateUrl: 'templates/add-rsslist.html',
                 controller: 'AddRsslistCtrl',
+            }
+        }
+    })
+
+    .state('tab.config', {
+        url: '/config',
+        views: {
+            'tab-config': {
+                templateUrl: 'templates/tab-config.html',
+                controller: 'ConfigCtrl',
+            }
+        }
+    })
+
+    .state('tab.favourite', {
+        url: '/favourite',
+        views: {
+            'tab-config': {
+                templateUrl: 'templates/tab-favourite.html',
+                // controller: 'ConfigCtrl',
+            }
+        }
+    })
+
+
+    .state('tab.about', {
+        url: '/about',
+        views: {
+            'tab-config': {
+                templateUrl: 'templates/tab-about.html',
+                // controller: 'ConfigCtrl',
             }
         }
     })

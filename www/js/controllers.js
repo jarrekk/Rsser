@@ -27,33 +27,20 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
         Storage.set("rsslist", $rootScope.rsslist);
     };
 
-    $scope.edit_rssData = {};
+    // $ionicModal.fromTemplateUrl('templates/article-addition.html', {
+    //     scope: $scope
+    // }).then(function(modal) {
+    //     $scope.article_modal = modal;
+    // });
 
-    $ionicModal.fromTemplateUrl('templates/edit-rss.html', {
-        scope: $scope
-    }).then(function(modal) {
-        $scope.edit_rss_modal = modal;
-    });
+    // $scope.close_article_modal = function() {
+    //     $scope.article_modal.hide();
+    // };
 
-    $scope.closeEditrss = function() {
-        $scope.edit_rss_modal.hide();
-    };
-
-    $scope.edit_rss = function(rss) {
-        $ionicListDelegate.closeOptionButtons();
-        $scope.edit_rssData = rss;
-        $scope.edit_rss_modal.show();
-    };
-
-    $scope.doEditrss = function() {
-        rssUtils.editbyId($rootScope.rsslist, $scope.edit_rssData.id, $scope.edit_rssData);
-        Storage.set("rsslist", $rootScope.rsslist);
-        // console.log($rootScope.rsslist);
-        $timeout(function() {
-            $scope.closeEditrss();
-            $scope.edit_rssData = {};
-        }, 1000);
-    };
+    // $scope.article_addition = function(rss) {
+    //     // $ionicListDelegate.closeOptionButtons();
+    //     $scope.article_modal.show();
+    // };
 
     var delete_rss = function(rss) {
         $rootScope.rsslist = rssUtils.deletebyId($rootScope.rsslist, rss.id);
@@ -126,7 +113,11 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     };
 
     $scope.broadcast_article = function(article) {
-        var content = article.content.replace(/<img/g, '$& style="width: auto;height: auto;max-width:100%;"').replace(/href="([^"]*)"/g, 'ng-click="openinbrowser(\'$1\')"');
+        if ($rootScope.save_traffic) {
+            var content = article.content.replace(/<img[^>]*>/g, '').replace(/href="([^"]*)"/g, 'ng-click="openinbrowser(\'$1\')"');
+        } else {
+            var content = article.content.replace(/<img/g, '$& style="width: auto;height: auto;max-width:100%;"').replace(/href="([^"]*)"/g, 'ng-click="openinbrowser(\'$1\')"');
+        }
         // console.log(content);
         $rootScope.the_article = {
             // "description": article.description.replace(/<img/g, '$& width="100%"').replace(/(href="[^"]*")/g, ''),
@@ -136,37 +127,64 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
             "pubDate": article.pubDate.replace(/ \+.*/, '')
         };
     };
+
+    $scope.favourite = function() {
+
+    }
 })
 
-.controller('ArticleCtrl', function($scope, $cordovaInAppBrowser, $ionicPopup, $ionicLoading) {
+.controller('ArticleCtrl', function($scope, $cordovaInAppBrowser, $ionicPopup, $ionicModal, $ionicLoading) {
     $scope.openinbrowser = function(url) {
         $cordovaInAppBrowser.open(url, '_system');
     };
-    $scope.share = function(article) {
-        Wechat.isInstalled(function (installed) {
+
+    $ionicModal.fromTemplateUrl('templates/article-addition.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.article_modal = modal;
+    });
+
+    $scope.close_article_modal = function() {
+        $scope.article_modal.hide();
+    };
+
+    $scope.article_addition = function(rss) {
+        // $ionicListDelegate.closeOptionButtons();
+        $scope.article_modal.show();
+    };
+
+    $scope.share = function(article, scene) {
+        Wechat.isInstalled(function(installed) {
             var link = article.link;
             var title = article.title;
+            if (scene == 'session') {
+                the_scene = Wechat.Scene.SESSION;
+            } else if (scene == 'favourite') {
+                the_scene = Wechat.Scene.FAVORITE;
+            } else {
+                the_scene = Wechat.Scene.TIMELINE;
+            }
             console.log(installed);
             if (installed) {
                 Wechat.share({
                     message: {
                         title: title,
-                        description: "Shred from Rsser",
+                        description: link,
                         mediaTagName: "Rsser",
                         thumb: "https://mmbiz.qlogo.cn/mmbiz/ibyYtkPq9m4o8Hyt9XrIPbiciauPQuZQLPjoHX12ohfV9ZEWPh5XciaZyficsCV8GCjdPTqgia9tVvd01RjbtgiaZBOXQ/0?wx_fmt=png",
                         media: {
-                            type: Wechat.Type.WEBPAGE,   // webpage
-                            webpageUrl: link    // webpage
+                            type: Wechat.Type.WEBPAGE, // webpage
+                            webpageUrl: link // webpage
                         }
                     },
                     // text: title + "-" + link + "-" + "Shared from Rsser",
-                    scene: Wechat.Scene.TIMELINE   // share to Timeline
-                }, function () {
+                    scene: the_scene // share to Timeline
+                }, function() {
                     $ionicLoading.show({
                         template: 'Share success!',
                         duration: 1500
                     });
-                }, function (reason) {
+                }, function(reason) {
                     $ionicLoading.show({
                         template: reason,
                         duration: 1500
@@ -224,7 +242,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     };
 })
 
-.controller('AddRssCtrl', function($scope, $rootScope, $ionicModal, $timeout, $ionicActionSheet, Storage) {
+.controller('AddRssCtrl', function($scope, $rootScope, $ionicModal, $timeout, $ionicLoading, $ionicActionSheet, Storage) {
     $scope.add_rssData = {};
     $ionicModal.fromTemplateUrl('templates/add-rss.html', {
         scope: $scope
@@ -239,6 +257,32 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     $scope.add_rss = function() {
         $scope.add_rss_modal.show();
     };
+
+    $scope.scan_qr = function scan() {
+        console.log('scan');
+        cordova.plugins.barcodeScanner.scan(
+            function(result) {
+                if (!result.cancelled) {
+                    if (result.format == "QR_CODE") {
+                        console.log(result, 'result');
+                        $scope.add_rssData.url = result.text;
+                        $ionicLoading.show({
+                            template: "Scanning success!",
+                            duration: 1000
+                        });
+                    }
+                }
+            },
+            function(error) {
+                console.log("Scanning failed: " + error);
+                $ionicLoading.show({
+                    template: "Scanning failed: " + error,
+                    duration: 1000
+                });
+            }
+        );
+    };
+
     var doAddrss = function() {
         if ($rootScope.rsslist.length > 0) {
             latest_id = $rootScope.rsslist[$rootScope.rsslist.length - 1].id;
@@ -278,6 +322,29 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
         }, 3500);
     };
 
+})
+
+.controller('ConfigCtrl', function($scope, $rootScope, Storage) {
+    $scope.clearcache = function() {
+        $rootScope.rsslist = [{
+            "id": 1,
+            "img": "img/rss/jack003.png",
+            "name": "jack003",
+            "url": "http://www.jack003.com/feed.xml",
+            "type": "blog"
+        }];
+        $http.get('add_rsslist.json').then(function(resp) {
+            $rootScope.add_rsslist = resp.data;
+        });
+        Storage.remove('rsslist');
+        Storage.remove('add_rsslist');
+    };
+    // console.log($rootScope.save_traffic);
+    $scope.savetraffic = function() {
+        $rootScope.save_traffic = !$rootScope.save_traffic;
+        Storage.set('save_traffic', $rootScope.save_traffic);
+        console.log($rootScope.save_traffic);
+    };
 })
 
 ;

@@ -25,3 +25,17 @@
   display: block;
   margin: 0px;
 }
+.sprite i{
+  height: 31.7px;
+  width: 31.7px;
+  margin: 0px auto;
+  display: block;
+  background-image: url("../img/icon/Flatilicious.png");
+}
+.sprite-article i{
+  height: 44px;
+  width: 44px;
+  margin: 0px auto;
+  display: block;
+  background-image: url("../img/icon/wechat_sm.png");
+}

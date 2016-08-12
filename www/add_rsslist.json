@@ -1,5 +1,5 @@
 {
-    "version": 3,
+    "version": 20160809,
     "news": [{
         "id": 1,
         "img": "img/rss/ifeng.png",
@@ -88,18 +88,30 @@
         "type": "article"
     },{
         "id": 2,
+        "img": "img/rss/yeeyan.png",
+        "name": "译言最新",
+        "url": "http://feed.yeeyan.org/latest",
+        "type": "article"
+    },{
+        "id": 3,
+        "img": "img/rss/yeeyan.png",
+        "name": "译言精选",
+        "url": "http://feed.yeeyan.org/select",
+        "type": "article"
+    },{
+        "id": 4,
+        "img": "img/rss/yeeyan.png",
+        "name": "译言科技",
+        "url": "http://feed.yeeyan.org/tech",
+        "type": "article"
+    },{
+        "id": 5,
         "img": "img/rss/Tencent-cdc.png",
         "name": "腾讯CDC",
         "url": "http://cdc.tencent.com/feed/",
         "type": "article"
     },{
-        "id": 3,
-        "img": "img/rss/cinephilia.png",
-        "name": "Cinephilia",
-        "url": "http://cinephilia.net/feed",
-        "type": "article"
-    },{
-        "id": 4,
+        "id": 6,
         "img": "img/rss/shanghaishuping.png",
         "name": "上海书评",
         "url": "http://www.dfdaily.com/rss/1170.xml",
@@ -117,5 +129,12 @@
         "name": "阮一峰Blog",
         "url": "http://www.ruanyifeng.com/blog/atom.xml",
         "type": "blog"
+    }],
+    "image": [{
+        "id": 1,
+        "img": "img/rss/cinephilia.png",
+        "name": "Cinephilia",
+        "url": "http://cinephilia.net/feed",
+        "type": "image"
     }]
 }
