@@ -1,10 +1,9 @@
-<ion-view view-title="{{ rss.name }}" hide-tabs on-swipe-right="myGoBack()">
+<ion-view view-title="{{ rss.name }}" hide-tabs>
   <ion-content>
     <ion-refresher pulling-text="Refresh" on-refresh="doRefresh(rss)"></ion-refresher>
     <ion-item ng-repeat="article in articles track by article.link" ng-click="broadcast_article(article)" ui-sref="tab.article">
       {{ article.title }}
       <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="article.pubDate"></ion-datetime>
     </ion-item>
-    <!-- <button ng-click="showban()">show</button> -->
   </ion-content>
 </ion-view>

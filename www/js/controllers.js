@@ -7,11 +7,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
             "version": version
         });
     };
-
     $scope.myGoBack = function() {
-        $ionicHistory.goBack();
-    };
-
+           $backView = $ionicHistory.backView();
+           $backView.go();
+        };
     $scope.data = {
         "showReorder": false
     };

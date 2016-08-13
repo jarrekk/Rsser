@@ -8,6 +8,13 @@
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform, $rootScope, $http, $state, Storage) {
+    // $rootScope.$on("$stateChangeSuccess",  function(event, to, toParams, from, fromParams) {
+    //     from.name && Storage.set('PreviousStateName', from.name);
+    //     fromParams && Storage.set('PreviousParamsName', JSON.stringify(fromParams));
+    // });
+    // $rootScope.myGoBack = function() {
+    //     $state.go(Storage.get('PreviousStateName'), JSON.parse(Storage.get('PreviousParamsName')));
+    // };
     $http.get('tour.json').then(function(resp) {
         $rootScope.tour = resp.data;
         if (Storage.get("tour")) {
