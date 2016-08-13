@@ -76,16 +76,20 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
 })
 
 .controller('DetailCtrl', function($scope, $rootScope, $compile, $ionicScrollDelegate, $stateParams, $http, $ionicLoading, $ionicModal, $cordovaInAppBrowser, Storage, rssUtils) {
+    // $scope.showban = function() {
+        // navigator.wapsAd.showban();
+    // };
     $ionicLoading.show({
         template: '<ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
     $scope.rss = rssUtils.findById($rootScope.rsslist, $stateParams.id);
     var url = "http://rss2json.com/api.json?callback=JSON_CALLBACK&rss_url=" + $scope.rss.url;
-
-    function get_articles(url) {
+    function get_articles(url, cache) {
         $.ajax({
             type: "get",
-            async: false,
+            timeout: 15000,
+            cache: cache,
+            // async: false,
             url: url,
             dataType: "jsonp",
             jsonp: "callback",
@@ -98,17 +102,19 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
             error: function() {
                 $ionicLoading.hide();
                 $ionicLoading.show({
-                    template: 'Failed to get rss! Please check the rss address.',
+                    template: 'Failed to get rss! Please check the rss address or try later.',
                     duration: 1500
                 });
             }
         });
     }
-    get_articles(url);
+    var cache = true;
+    get_articles(url, cache);
 
     $scope.doRefresh = function(rss) {
         var url = "http://rss2json.com/api.json?callback=JSON_CALLBACK&rss_url=" + $scope.rss.url;
-        get_articles(url);
+        var cache = false;
+        get_articles(url, cache);
         $scope.$broadcast('scroll.refreshComplete');
     };
 
@@ -324,7 +330,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
 
 })
 
-.controller('ConfigCtrl', function($scope, $rootScope, Storage) {
+.controller('ConfigCtrl', function($scope, $rootScope, $http, $ionicLoading, Storage) {
     $scope.clearcache = function() {
         $rootScope.rsslist = [{
             "id": 1,
@@ -338,6 +344,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
         });
         Storage.remove('rsslist');
         Storage.remove('add_rsslist');
+        $ionicLoading.show({
+            template: 'Clear cache success!',
+            duration: 1000
+        });
     };
     // console.log($rootScope.save_traffic);
     $scope.savetraffic = function() {

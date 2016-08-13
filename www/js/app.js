@@ -8,8 +8,6 @@
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform, $rootScope, $http, $state, Storage) {
-    // .run(function($ionicPlatform, $ionicConfigProvider, $rootScope, Storage) {
-    // $ionicConfigProvider.views.swipeBackEnabled(true);
     $http.get('tour.json').then(function(resp) {
         $rootScope.tour = resp.data;
         if (Storage.get("tour")) {
@@ -38,7 +36,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             $rootScope.backButton = false;
         }
     });
-
     $rootScope.rsslist = [{
         "id": 1,
         "img": "img/rss/jack003.png",
@@ -49,7 +46,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     if (Storage.get("rsslist")) {
         $rootScope.rsslist = Storage.get("rsslist");
     }
-
     $http.get('add_rsslist.json').then(function(resp) {
         $rootScope.add_rsslist = resp.data;
         if (Storage.get("add_rsslist")) {
@@ -74,14 +70,12 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             }];
         }
     });
-
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             cordova.plugins.Keyboard.disableScroll(true);
-
         }
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
@@ -91,32 +85,21 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 })
 
 .config(['$ionicConfigProvider', function($ionicConfigProvider) {
-
     $ionicConfigProvider.tabs.position('bottom'); // other values: top
-
 }])
 
 .config(function($stateProvider, $urlRouterProvider) {
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
+    // $ionicConfigProvider.views.swipeBackEnabled(true);
     $stateProvider
-
-    // setup an abstract state for the tabs directive
         .state('tour', {
         url: '/tour',
         templateUrl: 'templates/tour.html',
     })
-
     .state('tab', {
         url: '/tab',
         abstract: true,
         templateUrl: 'templates/tabs.html'
     })
-
-    // Each tab has its own nav history stack:
-
     .state('tab.home', {
         url: '/home',
         views: {
@@ -126,7 +109,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             }
         }
     })
-
     .state('tab.detail', {
         url: '/detail?id',
         views: {
@@ -136,7 +118,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             }
         }
     })
-
     .state('tab.article', {
         url: '/article',
         views: {
@@ -146,7 +127,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             }
         }
     })
-
     .state('tab.add', {
         url: '/add',
         views: {
@@ -156,7 +136,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             }
         }
     })
-
     .state('tab.add_rsslist', {
         url: '/rsslist?category',
         views: {
@@ -166,7 +145,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             }
         }
     })
-
     .state('tab.config', {
         url: '/config',
         views: {
@@ -176,18 +154,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             }
         }
     })
-
-    .state('tab.favourite', {
-        url: '/favourite',
-        views: {
-            'tab-config': {
-                templateUrl: 'templates/tab-favourite.html',
-                // controller: 'ConfigCtrl',
-            }
-        }
-    })
-
-
     .state('tab.about', {
         url: '/about',
         views: {
@@ -197,9 +163,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             }
         }
     })
-
     ;
-    // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/home');
 
 })

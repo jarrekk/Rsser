@@ -1,4 +1,4 @@
-<ion-modal-view style="height: 30%;top: 70%;">
+<ion-modal-view style="height: 30%; width: 100%;top: 70%;">
   <ion-header-bar>
     <h2 class="title">Share</h2>
   </ion-header-bar>
@@ -17,12 +17,18 @@
         </a>
       </div>
       <div class="col-33">
-        <a class="button button-large button-clear item text-center button- sprite-article" style="display:block;margin:0px;" ng-click="share(the_article, 'timeline')">
+        <a class="button button-large button-clear item text-center button-full sprite-article" style="display:block;margin:0px;" ng-click="share(the_article, 'timeline')">
           <i class="i-icon" style="background-position: -53px -18px;"></i>
           <h4>WeChat moment</h4>
         </a>
       </div>
     </div>
-    <button class="button button-full button-light" ng-click="close_article_modal()">Cancel</button>
+    <br>
+    <p class="text-center" style="font-size: 20px;font-weight: 120;" ng-click="close_article_modal()">Cancel</p>
+    <ion-footer-bar align-title="left" class="bar-assertive">
+      <div class="buttons">
+        <button class="button button-clear button-full" ng-click="close_article_modal()">Cancel</button>
+      </div>
+    </ion-footer-bar>
   </ion-content>
 </ion-modal-view>

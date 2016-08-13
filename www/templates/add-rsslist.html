@@ -1,4 +1,4 @@
-<ion-view view-title="{{ category | uppercase }}" hide-tabs>
+<ion-view view-title="{{ category | uppercase }}" hide-tabs on-swipe-right="myGoBack()">
   <ion-content>
     <ion-list>
     <ion-item class="item-remove-animate item-avatar" ng-repeat="rss in the_rsslist track by rss.name" type="item-text-wrap" ng-click="show(rss)">
