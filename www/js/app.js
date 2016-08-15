@@ -79,6 +79,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         .state('tour', {
         url: '/tour',
         templateUrl: 'templates/tour.html',
+        controller: 'TourCtrl'
     })
     .state('tab', {
         url: '/tab',
@@ -97,7 +98,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     .state('tab.detail', {
         url: '/detail?id',
         views: {
-            'tab-home': {
+            'tab-home@tab': {
                 templateUrl: 'templates/tab-detail.html',
                 controller: 'DetailCtrl',
             }
@@ -106,7 +107,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     .state('tab.article', {
         url: '/article',
         views: {
-            'tab-home': {
+            'tab-home@tab': {
                 templateUrl: 'templates/tab-article.html',
                 controller: 'ArticleCtrl',
             }
@@ -124,7 +125,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     .state('tab.add_rsslist', {
         url: '/rsslist?category',
         views: {
-            'tab-add': {
+            'tab-add@tab': {
                 templateUrl: 'templates/tab-add-rsslist.html',
                 controller: 'AddRsslistCtrl',
             }
@@ -142,7 +143,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     .state('tab.about', {
         url: '/about',
         views: {
-            'tab-config': {
+            'tab-config@tab': {
                 templateUrl: 'templates/tab-about.html',
                 controller: 'AboutCtrl',
             }

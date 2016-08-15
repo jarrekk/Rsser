@@ -1,5 +1,35 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services', 'ngSanitize'])
 
+.controller('TourCtrl', function($scope) {
+    $scope.slideChanged = function(index) {
+        console.log(index);
+        switch(index) {
+            case 0:
+                jQuery("#0-up, #0-down, #0-img").removeAttr('class').attr('class', '');
+                jQuery("#0-up, #0-down, #0-img").addClass('animated');
+                jQuery("#0-up").addClass('fadeInUp');
+                jQuery("#0-down").addClass('fadeInDown');
+                jQuery("#0-img").addClass('rotateIn');
+                console.log('I am on slide 0');
+                break;
+            case 1:
+                $('#1-up, #1-down, #1-img').removeAttr('class').attr('class', '');
+                $('#1-up, #1-down, #1-img').addClass('animated');
+                $('#1-up').addClass('fadeInUp');
+                $('#1-down').addClass('fadeInDown');
+                $('#1-img').addClass('rotateIn');
+                console.log('I am on slide 1');
+                break;
+            case 2:
+                $('#2-up').removeAttr('class').attr('class', '');
+                $('#2-up').addClass('animated');
+                $('#2-up').addClass('fadeInUp');
+                console.log('I am on slide 2');
+                break;
+        }
+    };
+})
+
 .controller('MainCtrl', function($scope, $rootScope, $state, $ionicHistory, Storage) {
     $scope.goHome = function(version) {
         $state.go("tab.home");
@@ -10,6 +40,52 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     $scope.myGoBack = function() {
         $ionicHistory.goBack();
     };
+    // $scope.$on('$ionicView.beforeLeave', function() {
+    //     // var currentView = $ionicHistory.currentView();
+    //     // console.log('ttt', currentView)
+    //     // var backView = $ionicHistory.backView();
+    //     // console.log('bbb', backView)
+    //     console.log('id', $ionicHistory.backView())
+    //     if ($ionicHistory.backView()) {
+    //         // $rootScope.backViewId = $ionicHistory.backView().viewId;
+    //         // console.log($rootScope.backViewId)
+    //     } else {
+    //         $rootScope.backView = $ionicHistory.currentView();
+    //     }
+    // });
+    // $scope.$on('$ionicView.enter', function() {
+    //     console.log('ccc', $ionicHistory.currentView())
+    //     if ($ionicHistory.currentView().backViewId) {
+    //     } else {
+    //         $ionicHistory.currentView().backViewId = $rootScope.backViewId;
+    //         console.log($ionicHistory.currentView())
+    //     }
+    //     if ($rootScope.backView) {
+    //         if ($ionicHistory.backView()) {} else {
+    //             $ionicHistory.backView().backViewId = $rootScope.backView.viewId;
+    //         }
+    //     }
+
+    //     console.log('bbb',$ionicHistory.backView());
+    // });
+    // $scope.customBack = function() {
+    //     console.log('<---- BACK');
+    //     //$ionicHistory.goBack();
+    //     var currentView = $ionicHistory.currentView();
+    //     var backView = $ionicHistory.backView();
+    //     console.log(currentView, backView)
+
+    //     if (backView) {
+    //         //there is a back view, go to it
+    //         if (currentView.stateName == backView.stateName) {
+    //             //if not works try to go doubleBack
+    //             var doubleBackView = $ionicHistory.getViewById(backView.backViewId);
+    //             $state.go(doubleBackView.stateName, doubleBackView.stateParams);
+    //         } else {
+    //             backView.go();
+    //         }
+    //     }
+    // }
     $scope.data = {
         "showReorder": false
     };
@@ -144,7 +220,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
             var content = article.content.replace(/<img/g, '$& style="width: auto;height: auto;max-width:100%;"').replace(/href="([^"]*)"/g, 'ng-click="openinbrowser(\'$1\')"');
         }
         if ($rootScope.settings["night"]) {
-            var content = content.replace(/<p[^>]*>/g, '<p$1 ng-class="{true: \'light\', false: \'\'}[settings.night]">');
+            var content = content.replace(/<p[^>]*>/g, '<p$1 ng-class="{true: \'light\', false: \'\'}[settings.night]">').replace(/<h(.) [^>]*>/g, '<h$1 $2 ng-class="{true: \'light\', false: \'\'}[settings.night]">');
         }
         // console.log(content);
         $rootScope.the_article = {
@@ -365,19 +441,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
             duration: 1000
         });
     };
-    $scope.savetraffic = function() {
-        // $rootScope.settings["save_traffic"] = !$rootScope.settings["save_traffic"];
+    $scope.$watch('settings.save_traffic', function() {
         Storage.set("settings", $rootScope.settings);
-        // console.log($rootScope.settings.save_traffic)
-        // console.log($rootScope.settings);
-    };
-    $scope.night_model = function() {
-        // $rootScope.settings["save_traffic"] = !$rootScope.settings["save_traffic"];
+    });
+    $scope.$watch('settings.night', function() {
         Storage.set("settings", $rootScope.settings);
-        // console.log($rootScope.settings.save_traffic)
-        // console.log($rootScope.settings);
-    };
-
+    });
 })
 
 .controller('AboutCtrl', function($scope, $rootScope, $ionicActionSheet, $timeout, $ionicLoading) {

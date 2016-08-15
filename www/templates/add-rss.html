@@ -6,19 +6,19 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <form ng-submit="show()">
+    <form ng-submit="show()" name="addRssForm">
       <div class="list">
         <label class="item item-input">
-          <input placeholder="Rss名称" type="text" ng-model="add_rssData.name">
+          <input placeholder="Rss名称" type="text" ng-model="add_rssData.name" ng-style="settings.night === true && {'color':'white'}" required>
         </label>
         <div class="item item-input">
         <label class="col col-90">
-          <input placeholder="Rss地址" type="text" ng-model="add_rssData.url">
+          <input placeholder="Rss地址" type="text" ng-model="add_rssData.url" ng-style="settings.night === true && {'color':'white'}" required>
         </label>
           <span ng-click="scan_qr()"><i class="icon ion-qr-scanner" style="font-size: 22px;" ng-class="{true: 'icon-color', false: ''}[settings.night]"></i></span>
           </div>
         <label class="item">
-          <button class="button button-block button-positive" type="submit">添加</button>
+          <button class="button button-block button-positive" type="submit" ng-disabled="addRssForm.$invalid">添加</button>
         </label>
       </div>
     </form>

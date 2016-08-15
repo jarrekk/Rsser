@@ -1,6 +1,6 @@
 <ion-modal-view style="height: 30%; width: 100%;top: 70%;" ng-class="{true: 'background', false: ''}[settings.night]">
   <ion-header-bar ng-class="{true: 'bar-dark', false: ''}[settings.night]">
-    <h2 class="title">Share</h2>
+    <h2 class="title">分享</h2>
   </ion-header-bar>
   <ion-content scroll="false">
     <div class="row">
@@ -11,20 +11,19 @@
         </a>
       </div> -->
       <div class="col-33">
-        <a class="button button-large button-clear item text-center button-full sprite-article" style="display:block;margin:0px;" ng-click="share(the_article, 'session')">
+        <a class="button button-large button-clear item text-center button-full sprite-article" ng-click="share(the_article, 'session')">
           <i class="i-icon" style="background-position: -14.25px -48px;"></i>
           <!-- <i class="i-icon" style="background-position: -9px -18px;"></i> -->
           <!-- <h6 ng-class="{true: 'light', false: ''}[settings.night]">微信好友</h6> -->
         </a>
       </div>
       <div class="col-33">
-        <a class="button button-large button-clear item text-center button-full sprite-article" style="display:block;margin:0px;" ng-click="share(the_article, 'timeline')">
+        <a class="button button-large button-clear item text-center button-full sprite-article" ng-click="share(the_article, 'timeline')">
           <i class="i-icon" style="background-position: -72px -48px;"></i>
           <!-- <h6 ng-class="{true: 'light', false: ''}[settings.night]">微信朋友圈</h6> -->
         </a>
       </div>
     </div>
-    <br>
-    <p class="text-center" ng-class="{true: 'light', false: ''}[settings.night]" style="font-size: 20px;font-weight: 120;" ng-click="close_article_modal()">Cancel</p>
+    <p class="text-center" ng-class="{true: 'light', false: ''}[settings.night]" style="font-size: 18px;font-weight: 120;" ng-click="close_article_modal()">取消</p>
   </ion-content>
 </ion-modal-view>

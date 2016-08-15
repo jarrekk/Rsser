@@ -1,31 +1,8 @@
 <ion-view view-title="配置" ng-class="{true: 'background', false: ''}[settings.night]">
   <ion-content>
     <ion-list>
-    <!-- <ion-item class=" item-icon-right" type="item-text-wrap">
-      Test
-      <i class="icon ion-chevron-right icon-accessory"></i>
-    </ion-item> -->
-    <ion-item class="item item-toggle" type="item-text-wrap">
-      <span ng-class="{true: 'light', false: ''}[settings.night]">无图模式</span>
-<!--       <span class="item-note">
-            No image
-      </span> -->
-      <label class="toggle toggle-balanced">
-       <input type="checkbox" ng-click="savetraffic()" ng-model="settings.save_traffic">
-       <div class="track">
-         <div class="handle"></div>
-       </div>
-     </label>
-    </ion-item>
-    <ion-item class="item item-toggle" type="item-text-wrap">
-      <span ng-class="{true: 'light', false: ''}[settings.night]">夜间模式</span>
-      <label class="toggle toggle-balanced">
-       <input type="checkbox" ng-click="night_model()" ng-model="settings.night">
-       <div class="track">
-         <div class="handle"></div>
-       </div>
-     </label>
-    </ion-item>
+     <ion-toggle ng-class="{true: 'light', false: ''}[settings.night]" ng-model="settings.save_traffic">无图模式</ion-toggle>
+     <ion-toggle ng-class="{true: 'light', false: ''}[settings.night]" ng-model="settings.night">夜间模式</ion-toggle>
     <!-- <ion-item class="item-icon-right" ui-sref="tab.favourite">
       My favourite
       <i class="icon ion-chevron-right icon-accessory"></i>

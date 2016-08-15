@@ -61,3 +61,12 @@ p.light {
 .icon-color {
   color: white;
 }
+.landing-one {
+  background: url('../img/landing/one.png');
+}
+.landing-two {
+  background: url('../img/landing/two.png');
+}
+.landing-three {
+  background: url('../img/landing/three.png');
+}
