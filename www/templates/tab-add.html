@@ -1,42 +1,42 @@
-<ion-view view-title="Add">
+<ion-view view-title="添加" ng-class="{true: 'background', false: ''}[settings.night]">
   <ion-content>
     <div class="row">
       <div class="col-33">
-        <a class="button button-large button-clear item text-center button-full sprite" ui-sref="tab.add_rsslist({category:'news'})" style="display:block;margin:0px;">
+        <a class="button button-large button-clear item text-center button-full sprite" ui-sref="tab.add_rsslist({category:'新闻'})" style="display:block;margin:0px;">
           <i class="i-icon" style="background-position: -35px -289px;"></i>
-          <h2>News</h2>
+          <h2 ng-class="{true: 'light', false: ''}[settings.night]">新闻</h2>
         </a>
       </div>
       <div class="col-33">
-        <a class="button button-large button-clear item text-center button-full sprite" ui-sref="tab.add_rsslist({category:'tech'})" style="display:block;margin:0px;">
+        <a class="button button-large button-clear item text-center button-full sprite" ui-sref="tab.add_rsslist({category:'科技'})" style="display:block;margin:0px;">
           <i class="i-icon" style="background-position: -205px -289px;"></i>
-          <h2>Technology</h2>
+          <h2 ng-class="{true: 'light', false: ''}[settings.night]">科技</h2>
         </a>
       </div>
       <div class="col-33">
-        <a class="button button-large button-clear item text-center button-full sprite" ui-sref="tab.add_rsslist({category:'image'})" style="display:block;margin:0px;">
+        <a class="button button-large button-clear item text-center button-full sprite" ui-sref="tab.add_rsslist({category:'图片'})" style="display:block;margin:0px;">
           <i class="i-icon" style="background-position: -249px -331px;"></i>
-          <h2>Image</h2>
+          <h2 ng-class="{true: 'light', false: ''}[settings.night]">图片</h2>
         </a>
       </div>
     </div>
     <div class="row">
       <div class="col-33">
-        <a class="button button-large button-clear item text-center button-full sprite" ui-sref="tab.add_rsslist({category:'article'})" style="display:block;margin:0px;">
+        <a class="button button-large button-clear item text-center button-full sprite" ui-sref="tab.add_rsslist({category:'文章'})" style="display:block;margin:0px;">
           <i class="i-icon" style="background-position: -120px -203px;"></i>
-          <h2>Article</h2>
+          <h2 ng-class="{true: 'light', false: ''}[settings.night]">文章</h2>
         </a>
       </div>
       <div class="col-33">
-        <a class="button button-large button-clear item text-center button-full sprite" ui-sref="tab.add_rsslist({category:'blog'})" style="display:block;margin:0px;">
+        <a class="button button-large button-clear item text-center button-full sprite" ui-sref="tab.add_rsslist({category:'博客'})" style="display:block;margin:0px;">
           <i class="i-icon" style="background-position: -163px -118px;"></i>
-          <h2>Blog</h2>
+          <h2 ng-class="{true: 'light', false: ''}[settings.night]">博客</h2>
         </a>
       </div>
       <div class="col-33">
         <a class="button button-large button-clear item text-center button-full sprite" ng-click="add_rss()" style="display:block;margin:0px;">
           <i class="i-icon" style="background-position: -334px -76px;"></i>
-          <h2>Manual</h2>
+          <h2 ng-class="{true: 'light', false: ''}[settings.night]">手动添加</h2>
         </a>
       </div>
     </div>

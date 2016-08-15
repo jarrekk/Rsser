@@ -30,7 +30,7 @@
   width: 31.7px;
   margin: 0px auto;
   display: block;
-  background-image: url("../img/icon/Flatilicious.png");
+  background-image: url("../img/icon/icon-bak.png");
 }
 .sprite-article i{
   height: 44px;
@@ -38,4 +38,24 @@
   margin: 0px auto;
   display: block;
   background-image: url("../img/icon/wechat_sm.png");
+}
+.add-label {
+  height: 160px;
+}
+.background, .background .pane, .background .item, .background .item-complex .item-content {
+    background-color: #444444 !important;
+}
+p.light {
+  color:rgb(255, 255, 255)
+}
+.img-border {
+  border-radius: 25px;
+}
+.refresh, .refresh .scroll-refresher, .refresh .ionic-refresher-content, .refresh .ionic-refresher-with-text, .refresh .spinner{
+  color: #fff;
+  stroke: #fff;
+  fill: #fff;
+}
+.icon-color {
+  color: white;
 }

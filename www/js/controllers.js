@@ -8,9 +8,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
         });
     };
     $scope.myGoBack = function() {
-           $backView = $ionicHistory.backView();
-           $backView.go();
-        };
+        $ionicHistory.goBack();
+    };
     $scope.data = {
         "showReorder": false
     };
@@ -61,8 +60,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     $scope.show = function(rss) {
         var hideSheet = $ionicActionSheet.show({
             titleText: rss.name,
-            destructiveText: 'Delete',
-            cancelText: 'Cancel',
+            destructiveText: '删除',
+            cancelText: '取消',
             destructiveButtonClicked: function() {
                 delete_rss(rss);
                 hideSheet();
@@ -76,18 +75,19 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
 
 .controller('DetailCtrl', function($scope, $rootScope, $compile, $ionicScrollDelegate, $stateParams, $http, $ionicLoading, $ionicModal, $cordovaInAppBrowser, Storage, rssUtils) {
     // $scope.showban = function() {
-        // navigator.wapsAd.showban();
+    // navigator.wapsAd.showban();
     // };
     $ionicLoading.show({
         template: '<ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
     $scope.rss = rssUtils.findById($rootScope.rsslist, $stateParams.id);
     var url = "http://rss2json.com/api.json?callback=JSON_CALLBACK&rss_url=" + $scope.rss.url;
-    function get_articles(url, cache) {
+
+    function get_articles(url) {
         $.ajax({
             type: "get",
-            timeout: 15000,
-            cache: cache,
+            timeout: 20000,
+            cache: true,
             // async: false,
             url: url,
             dataType: "jsonp",
@@ -101,27 +101,50 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
             error: function() {
                 $ionicLoading.hide();
                 $ionicLoading.show({
-                    template: 'Failed to get rss! Please check the rss address or try later.',
+                    template: '获取文章失败，请检查rss地址或稍后再试',
                     duration: 1500
                 });
             }
         });
     }
-    var cache = true;
-    get_articles(url, cache);
+    get_articles(url);
 
     $scope.doRefresh = function(rss) {
         var url = "http://rss2json.com/api.json?callback=JSON_CALLBACK&rss_url=" + $scope.rss.url;
-        var cache = false;
-        get_articles(url, cache);
-        $scope.$broadcast('scroll.refreshComplete');
+        $.ajax({
+            type: "get",
+            timeout: 20000,
+            cache: false,
+            // async: false,
+            url: url,
+            dataType: "jsonp",
+            jsonp: "callback",
+            jsonpCallback: "flightHandler",
+            success: function(json) {
+                $ionicLoading.hide();
+                $scope.articles = json.items;
+                $scope.$broadcast('scroll.refreshComplete');
+                // console.log(json);
+            },
+            error: function() {
+                $ionicLoading.hide();
+                $scope.$broadcast('scroll.refreshComplete');
+                $ionicLoading.show({
+                    template: '获取文章失败，请检查rss地址或稍后再试',
+                    duration: 1500
+                });
+            }
+        });
     };
 
     $scope.broadcast_article = function(article) {
-        if ($rootScope.save_traffic) {
+        if ($rootScope.settings["save_traffic"]) {
             var content = article.content.replace(/<img[^>]*>/g, '').replace(/href="([^"]*)"/g, 'ng-click="openinbrowser(\'$1\')"');
         } else {
             var content = article.content.replace(/<img/g, '$& style="width: auto;height: auto;max-width:100%;"').replace(/href="([^"]*)"/g, 'ng-click="openinbrowser(\'$1\')"');
+        }
+        if ($rootScope.settings["night"]) {
+            var content = content.replace(/<p[^>]*>/g, '<p$1 ng-class="{true: \'light\', false: \'\'}[settings.night]">');
         }
         // console.log(content);
         $rootScope.the_article = {
@@ -186,7 +209,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
                     scene: the_scene // share to Timeline
                 }, function() {
                     $ionicLoading.show({
-                        template: 'Share success!',
+                        template: '分享成功!',
                         duration: 1500
                     });
                 }, function(reason) {
@@ -197,7 +220,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
                 });
             } else {
                 $ionicLoading.show({
-                    template: "Wechat is not installed!",
+                    template: "未安装微信!",
                     duration: 1500
                 });
             }
@@ -227,10 +250,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     $scope.show = function(rss) {
         var hideSheet = $ionicActionSheet.show({
             buttons: [{
-                text: '<b>Add</b>'
+                text: '添加'
             }, ],
             titleText: rss.name,
-            cancelText: 'Cancel',
+            cancelText: '取消',
             cancel: function() {
                 // add cancel code..
             },
@@ -272,16 +295,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
                         console.log(result, 'result');
                         $scope.add_rssData.url = result.text;
                         $ionicLoading.show({
-                            template: "Scanning success!",
+                            template: "扫描成功!",
                             duration: 1000
                         });
                     }
                 }
             },
             function(error) {
-                console.log("Scanning failed: " + error);
+                console.log("扫描失败: " + error);
                 $ionicLoading.show({
-                    template: "Scanning failed: " + error,
+                    template: "扫描失败: " + error,
                     duration: 1000
                 });
             }
@@ -308,10 +331,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     $scope.show = function() {
         var hideSheet = $ionicActionSheet.show({
             buttons: [{
-                text: '<b>Add</b>'
+                text: '添加'
             }, ],
             titleText: $scope.add_rssData.name,
-            cancelText: 'Cancel',
+            cancelText: '取消',
             cancel: function() {
                 // add cancel code..
             },
@@ -331,28 +354,98 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
 
 .controller('ConfigCtrl', function($scope, $rootScope, $http, $ionicLoading, Storage) {
     $scope.clearcache = function() {
-        $rootScope.rsslist = [{
-            "id": 1,
-            "img": "img/rss/jack003.png",
-            "name": "jack003",
-            "url": "http://www.jack003.com/feed.xml",
-            "type": "blog"
-        }];
+        $rootScope.rsslist = [];
         $http.get('add_rsslist.json').then(function(resp) {
             $rootScope.add_rsslist = resp.data;
         });
         Storage.remove('rsslist');
         Storage.remove('add_rsslist');
         $ionicLoading.show({
-            template: 'Clear cache success!',
+            template: '清除缓存配置成功!',
             duration: 1000
         });
     };
-    // console.log($rootScope.save_traffic);
     $scope.savetraffic = function() {
-        $rootScope.save_traffic = !$rootScope.save_traffic;
-        Storage.set('save_traffic', $rootScope.save_traffic);
-        console.log($rootScope.save_traffic);
+        // $rootScope.settings["save_traffic"] = !$rootScope.settings["save_traffic"];
+        Storage.set("settings", $rootScope.settings);
+        // console.log($rootScope.settings.save_traffic)
+        // console.log($rootScope.settings);
+    };
+    $scope.night_model = function() {
+        // $rootScope.settings["save_traffic"] = !$rootScope.settings["save_traffic"];
+        Storage.set("settings", $rootScope.settings);
+        // console.log($rootScope.settings.save_traffic)
+        // console.log($rootScope.settings);
+    };
+
+})
+
+.controller('AboutCtrl', function($scope, $rootScope, $ionicActionSheet, $timeout, $ionicLoading) {
+    var share = function(scene) {
+        Wechat.isInstalled(function(installed) {
+            if (scene == 'session') {
+                the_scene = Wechat.Scene.SESSION;
+            } else {
+                the_scene = Wechat.Scene.TIMELINE;
+            }
+            console.log(installed);
+            if (installed) {
+                Wechat.share({
+                    message: {
+                        title: "苹果应用Rsser",
+                        description: "Rss订阅器，自由的阅读新闻。",
+                        mediaTagName: "Rsser",
+                        thumb: "https://mmbiz.qlogo.cn/mmbiz/ibyYtkPq9m4o8Hyt9XrIPbiciauPQuZQLPjoHX12ohfV9ZEWPh5XciaZyficsCV8GCjdPTqgia9tVvd01RjbtgiaZBOXQ/0?wx_fmt=png",
+                        media: {
+                            type: Wechat.Type.WEBPAGE, // webpage
+                            webpageUrl: "http://www.jack003.com" // webpage
+                        }
+                    },
+                    // text: title + "-" + link + "-" + "Shared from Rsser",
+                    scene: the_scene // share to Timeline
+                }, function() {
+                    $ionicLoading.show({
+                        template: '感谢您的分享!',
+                        duration: 1500
+                    });
+                }, function(reason) {
+                    $ionicLoading.show({
+                        template: reason,
+                        duration: 1500
+                    });
+                });
+            } else {
+                $ionicLoading.show({
+                    template: "未安装微信!",
+                    duration: 1500
+                });
+            }
+        });
+    };
+    $scope.show = function() {
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [{
+                text: '微信好友'
+            }, {
+                text: '微信朋友圈'
+            }],
+            titleText: "分享Rsser",
+            cancelText: '取消',
+            cancel: function() {
+                // add cancel code..
+            },
+            buttonClicked: function(index) {
+                if (index === 0) {
+                    share('session');
+                } else if (index === 1) {
+                    share();
+                }
+                return true;
+            }
+        });
+        $timeout(function() {
+            hideSheet();
+        }, 3500);
     };
 })
 

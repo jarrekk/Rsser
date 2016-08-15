@@ -1,140 +1,146 @@
 {
-    "version": 20160809,
-    "news": [{
+    "version": 20160812,
+    "新闻": [{
         "id": 1,
         "img": "img/rss/ifeng.png",
         "name": "凤凰新闻-综合资讯",
         "url": "http://news.ifeng.com/rss/index.xml",
-        "type": "news"
+        "type": "新闻"
     },{
         "id": 2,
         "img": "img/rss/ifeng.png",
         "name": "凤凰新闻-军事频道",
         "url": "http://news.ifeng.com/mil/rss/index.xml",
-        "type": "news"
+        "type": "新闻"
     },{
         "id": 3,
         "img": "img/rss/ifeng.png",
         "name": "凤凰新闻-历史频道",
         "url": "http://news.ifeng.com/history/rss/index.xml",
-        "type": "news"
+        "type": "新闻"
     },{
         "id": 4,
         "img": "img/rss/ifeng.png",
         "name": "凤凰新闻-大陆新闻",
         "url": "http://news.ifeng.com/rss/mainland.xml",
-        "type": "news"
+        "type": "新闻"
     },{
         "id": 5,
         "img": "img/rss/ifeng.png",
         "name": "凤凰新闻-台湾新闻",
         "url": "http://news.ifeng.com/rss/taiwan.xml",
-        "type": "news"
+        "type": "新闻"
     },{
         "id": 6,
         "img": "img/rss/ifeng.png",
         "name": "凤凰新闻-国际新闻",
         "url": "http://news.ifeng.com/rss/world.xml",
-        "type": "news"
+        "type": "新闻"
     },{
         "id": 7,
         "img": "img/rss/ifeng.png",
         "name": "凤凰新闻-社会新闻",
         "url": "http://news.ifeng.com/rss/society.xml",
-        "type": "news"
+        "type": "新闻"
     },{
         "id": 8,
         "img": "img/rss/ifeng.png",
         "name": "凤凰新闻-体育频道",
         "url": "http://news.ifeng.com/sports/rss/index.xml",
-        "type": "news"
+        "type": "新闻"
     }],
-    "tech": [{
+    "科技": [{
         "id": 1,
         "img": "img/rss/cnbeta.png",
         "name": "cnBeta",
         "url": "http://rss.cnbeta.com/rss",
-        "type": "tech"
+        "type": "科技"
     },{
         "id": 2,
         "img": "img/rss/36kr.png",
         "name": "36Kr",
         "url": "http://36kr.com/feed",
-        "type": "tech"
+        "type": "科技"
     },{
         "id": 3,
         "img": "img/rss/songshuhui.png",
         "name": "科学松鼠会",
         "url": "http://songshuhui.net/feed",
-        "type": "tech"
+        "type": "科技"
     },{
         "id": 4,
         "img": "img/rss/iplay.png",
         "name": "异次元软件世界",
         "url": "http://feed.iplaysoft.com/",
-        "type": "tech"
+        "type": "科技"
     },{
         "id": 5,
         "img": "img/rss/lixiangshenghuo.png",
         "name": "理想生活实验室",
         "url": "http://www.toodaylab.com/feed",
-        "type": "tech"
+        "type": "科技"
     }],
-    "article": [{
+    "文章": [{
         "id": 1,
         "img": "img/rss/zhihu-select.png",
         "name": "知乎精选",
         "url": "http://zhihu.com/rss",
-        "type": "article"
+        "type": "文章"
     },{
         "id": 2,
         "img": "img/rss/yeeyan.png",
         "name": "译言最新",
         "url": "http://feed.yeeyan.org/latest",
-        "type": "article"
+        "type": "文章"
     },{
         "id": 3,
         "img": "img/rss/yeeyan.png",
         "name": "译言精选",
         "url": "http://feed.yeeyan.org/select",
-        "type": "article"
+        "type": "文章"
     },{
         "id": 4,
         "img": "img/rss/yeeyan.png",
         "name": "译言科技",
         "url": "http://feed.yeeyan.org/tech",
-        "type": "article"
+        "type": "文章"
     },{
         "id": 5,
         "img": "img/rss/Tencent-cdc.png",
         "name": "腾讯CDC",
         "url": "http://cdc.tencent.com/feed/",
-        "type": "article"
+        "type": "文章"
     },{
         "id": 6,
         "img": "img/rss/shanghaishuping.png",
         "name": "上海书评",
         "url": "http://www.dfdaily.com/rss/1170.xml",
-        "type": "article"
+        "type": "文章"
     }],
-    "blog": [{
+    "博客": [{
         "id": 1,
         "img": "img/rss/hanhan.png",
         "name": "韩寒Blog",
         "url": "http://blog.sina.com.cn/rss/twocold.xml",
-        "type": "blog"
+        "type": "博客"
     },{
         "id": 2,
         "img": "img/rss/ruanyifeng.png",
         "name": "阮一峰Blog",
         "url": "http://www.ruanyifeng.com/blog/atom.xml",
-        "type": "blog"
+        "type": "博客"
+    },{
+        "id": 3,
+        "img": "img/rss/jack003.png",
+        "name": "jack003",
+        "url": "http://www.jack003.com/feed.xml",
+        "type": "博客"
     }],
-    "image": [{
+    "图片": [{
         "id": 1,
         "img": "img/rss/cinephilia.png",
         "name": "Cinephilia",
         "url": "http://cinephilia.net/feed",
-        "type": "image"
+        "type": "图片"
     }]
 }

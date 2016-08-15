@@ -1,0 +1,11 @@
+<ion-view view-title="{{ category }}" hide-tabs ng-class="{true: 'background', false: ''}[settings.night]">
+  <ion-content>
+    <ion-list>
+    <ion-item class="item-remove-animate item-avatar" ng-repeat="rss in the_rsslist track by rss.name" type="item-text-wrap" ng-click="show(rss)">
+      <img src="{{ rss.img }}">
+      <h2 ng-class="{true: 'light', false: ''}[settings.night]">{{ rss.name }}</h2>
+      <p ng-class="{true: 'light', false: ''}[settings.night]">{{ rss.url }}</p>
+    </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

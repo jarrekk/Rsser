@@ -1,4 +1,4 @@
-<ion-view view-title="Config">
+<ion-view view-title="配置" ng-class="{true: 'background', false: ''}[settings.night]">
   <ion-content>
     <ion-list>
     <!-- <ion-item class=" item-icon-right" type="item-text-wrap">
@@ -6,12 +6,21 @@
       <i class="icon ion-chevron-right icon-accessory"></i>
     </ion-item> -->
     <ion-item class="item item-toggle" type="item-text-wrap">
-      Save traffic
-      <span class="item-note">
+      <span ng-class="{true: 'light', false: ''}[settings.night]">无图模式</span>
+<!--       <span class="item-note">
             No image
-          </span>
+      </span> -->
       <label class="toggle toggle-balanced">
-       <input type="checkbox" ng-click="savetraffic()" ng-model="save_traffic">
+       <input type="checkbox" ng-click="savetraffic()" ng-model="settings.save_traffic">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+    </ion-item>
+    <ion-item class="item item-toggle" type="item-text-wrap">
+      <span ng-class="{true: 'light', false: ''}[settings.night]">夜间模式</span>
+      <label class="toggle toggle-balanced">
+       <input type="checkbox" ng-click="night_model()" ng-model="settings.night">
        <div class="track">
          <div class="handle"></div>
        </div>
@@ -22,11 +31,11 @@
       <i class="icon ion-chevron-right icon-accessory"></i>
     </ion-item> -->
     <ion-item class="item-icon-right" ui-sref="tab.about">
-      About Rsser
+      <span ng-class="{true: 'light', false: ''}[settings.night]">关于Rsser</span>
       <i class="icon ion-chevron-right icon-accessory"></i>
     </ion-item>
     </ion-list>
-    <button class="button button-full button-assertive" ng-click="clearcache()">Clear Cache</button>
-    <p class="text-center">Rsser &copy; 2016</p>
+    <button class="button button-full button-assertive" ng-click="clearcache()">清空并重置</button>
+    <p class="text-center" ng-class="{true: 'light', false: ''}[settings.night]">Rsser &copy; 2016</p>
   </ion-content>
 </ion-view>

@@ -1,14 +1,14 @@
-<ion-view view-title="Detail" hide-tabs>
+<ion-view view-title="详细内容" hide-tabs ng-class="{true: 'background', false: ''}[settings.night]">
   <ion-nav-buttons side="right">
     <button class="button button-clear button-icon ion-ios-more" ng-click="article_addition()"></button>
   </ion-nav-buttons>
   <ion-content>
     <div class="item item-text-wrap">
-        <h2 class="text-center">{{ the_article.title }}</h2>
-        <p class="text-center">{{ the_article.pubDate }}</p>
+        <h2 class="text-center" ng-class="{true: 'light', false: ''}[settings.night]">{{ the_article.title }}</h2>
+        <p class="text-center" ng-class="{true: 'light', false: ''}[settings.night]">{{ the_article.pubDate }}</p>
         <br>
-        <p compile="the_article.content"></p>
-        <a ng-click="openinbrowser(the_article.link)"><i class="fa fa-search"></i> Read the original</a>
+        <p ng-class="{true: 'light', false: ''}[settings.night]" compile="the_article.content"></p>
+        <a ng-click="openinbrowser(the_article.link)"><i class="fa fa-search"></i> 阅读原文</a>
     </div>
   </ion-content>
 </ion-view>

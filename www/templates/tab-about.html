@@ -1,21 +1,21 @@
-<ion-view view-title="About" hide-tabs>
+<ion-view view-title="关于" hide-tabs ng-class="{true: 'background', false: ''}[settings.night]">
   <ion-content>
   <br>
   <div class="text-center">
-    <img src="img/rss/rss.png">
-    <h4>Rsser 1.0.0</h4>
+    <img class="img-border" src="img/rss/rss.png">
+    <h4 ng-class="{true: 'light', false: ''}[settings.night]">Rsser 1.0.0</h4>
   </div>
   <ion-list>
     <ion-item class=" item-icon-right" type="item-text-wrap">
-      Rate Rsser
+      <span ng-class="{true: 'light', false: ''}[settings.night]">评价Rsser</span>
       <i class="icon ion-chevron-right icon-accessory"></i>
     </ion-item>
-    <ion-item class=" item-icon-right" type="item-text-wrap">
-      Share Rsser
+    <ion-item class=" item-icon-right" type="item-text-wrap" ng-click="show()">
+      <span ng-class="{true: 'light', false: ''}[settings.night]">分享Rsser</span>
       <i class="icon ion-chevron-right icon-accessory"></i>
     </ion-item>
   </ion-list>
   <br>
-    <p class="text-center">Rsser &copy; 2016</p>
+    <p class="text-center" ng-class="{true: 'light', false: ''}[settings.night]">Rsser &copy; 2016</p>
   </ion-content>
 </ion-view>

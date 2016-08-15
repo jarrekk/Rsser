@@ -1,24 +1,24 @@
-<ion-modal-view on-swipe-down="closeAddrss()">
-  <ion-header-bar>
-    <h1 class="title">Add Rss</h1>
+<ion-modal-view on-swipe-down="closeAddrss()" ng-class="{true: 'background', false: ''}[settings.night]">
+  <ion-header-bar class="bar-dark">
+    <h1 class="title">添加rss</h1>
     <div class="buttons">
-      <button class="button button-clear button-positive" ng-click="closeAddrss()">Cancel</button>
+      <button class="button button-clear button-light" ng-click="closeAddrss()">取消</button>
     </div>
   </ion-header-bar>
   <ion-content>
     <form ng-submit="show()">
       <div class="list">
         <label class="item item-input">
-          <input placeholder="Rss name" type="text" ng-model="add_rssData.name">
+          <input placeholder="Rss名称" type="text" ng-model="add_rssData.name">
         </label>
         <div class="item item-input">
-        <label class="col-80">
-          <input placeholder="Rss url" type="text" ng-model="add_rssData.url">
+        <label class="col col-90">
+          <input placeholder="Rss地址" type="text" ng-model="add_rssData.url">
         </label>
-          <span ng-click="scan_qr()"><i class="icon ion-qr-scanner" style="font-size: 32px;"></i></span>
+          <span ng-click="scan_qr()"><i class="icon ion-qr-scanner" style="font-size: 22px;" ng-class="{true: 'icon-color', false: ''}[settings.night]"></i></span>
           </div>
         <label class="item">
-          <button class="button button-block button-positive" type="submit">Add</button>
+          <button class="button button-block button-positive" type="submit">添加</button>
         </label>
       </div>
     </form>

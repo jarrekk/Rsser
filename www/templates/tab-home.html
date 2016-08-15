@@ -1,4 +1,4 @@
-<ion-view view-title="Home">
+<ion-view view-title="首页" ng-class="{true: 'background', false: ''}[settings.night]">
     <!-- <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-ios-gear" menu-toggle="left" ng-click="article_addition()">
         </button>
@@ -12,16 +12,16 @@
     <ion-list show-reorder="data.showReorder">
     <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="rss in rsslist track by rss.id" type="item-text-wrap" ui-sref="tab.detail({id:rss.id})">
       <img src="{{ rss.img }}">
-      <h2>{{ rss.name }}</h2>
-      <p>{{ rss.url }}</p>
+      <h2 ng-class="{true: 'light', false: ''}[settings.night]">{{ rss.name }}</h2>
+      <p ng-class="{true: 'light', false: ''}[settings.night]">{{ rss.url }}</p>
       <i class="icon ion-chevron-right icon-accessory"></i>
       <!-- <ion-option-button class="button-energized" ng-click="edit_rss(rss)">
         Edit
       </ion-option-button> -->
       <ion-option-button class="button-assertive" ng-click="show(rss)">
-        Delete
+         &nbsp;删除&nbsp;
       </ion-option-button>
-      <ion-reorder-button class="ion-navicon" on-reorder="moveItem(rss, $fromIndex, $toIndex)"></ion-reorder-button>
+      <ion-reorder-button on-reorder="moveItem(rss, $fromIndex, $toIndex)"><i class="icon ion-navicon" ng-class="{true: 'light', false: ''}[settings.night]"></i></ion-reorder-button>
     </ion-item>
     </ion-list>
   </ion-content>

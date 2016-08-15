@@ -8,13 +8,6 @@
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform, $rootScope, $http, $state, Storage) {
-    // $rootScope.$on("$stateChangeSuccess",  function(event, to, toParams, from, fromParams) {
-    //     from.name && Storage.set('PreviousStateName', from.name);
-    //     fromParams && Storage.set('PreviousParamsName', JSON.stringify(fromParams));
-    // });
-    // $rootScope.myGoBack = function() {
-    //     $state.go(Storage.get('PreviousStateName'), JSON.parse(Storage.get('PreviousParamsName')));
-    // };
     $http.get('tour.json').then(function(resp) {
         $rootScope.tour = resp.data;
         if (Storage.get("tour")) {
@@ -25,11 +18,14 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             $state.go("tour");
         }
     });
-
-    if (Storage.get('save_traffic')) {
-        $rootScope.save_traffic = Storage.get('save_traffic');
+    // Storage.remove('save_traffic')
+    if (Storage.get("settings")) {
+        $rootScope.settings = Storage.get("settings");
     } else {
-        $rootScope.save_traffic = false;
+        $rootScope.settings = {
+            "save_traffic": false,
+            "night": false
+        };
     }
 
     $rootScope.backButton = true;
@@ -43,13 +39,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             $rootScope.backButton = false;
         }
     });
-    $rootScope.rsslist = [{
-        "id": 1,
-        "img": "img/rss/jack003.png",
-        "name": "jack003",
-        "url": "http://www.jack003.com/feed.xml",
-        "type": "blog"
-    }];
+    $rootScope.rsslist = [];
     if (Storage.get("rsslist")) {
         $rootScope.rsslist = Storage.get("rsslist");
     }
@@ -59,22 +49,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             if (Storage.get("add_rsslist").version === $rootScope.add_rsslist.version) {
                 $rootScope.add_rsslist = Storage.get("add_rsslist");
             } else {
-                $rootScope.rsslist = [{
-                    "id": 1,
-                    "img": "img/rss/jack003.png",
-                    "name": "jack003",
-                    "url": "http://www.jack003.com/feed.xml",
-                    "type": "blog"
-                }];
+                $rootScope.rsslist = [];
             }
         } else {
-            $rootScope.rsslist = [{
-                "id": 1,
-                "img": "img/rss/jack003.png",
-                "name": "jack003",
-                "url": "http://www.jack003.com/feed.xml",
-                "type": "blog"
-            }];
+            $rootScope.rsslist = [];
         }
     });
     $ionicPlatform.ready(function() {
@@ -147,7 +125,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         url: '/rsslist?category',
         views: {
             'tab-add': {
-                templateUrl: 'templates/add-rsslist.html',
+                templateUrl: 'templates/tab-add-rsslist.html',
                 controller: 'AddRsslistCtrl',
             }
         }
@@ -166,7 +144,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         views: {
             'tab-config': {
                 templateUrl: 'templates/tab-about.html',
-                // controller: 'ConfigCtrl',
+                controller: 'AboutCtrl',
             }
         }
     })
@@ -187,15 +165,17 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             }
         );
     };
-}]).controller('MyCtrl', function($scope) {
-    var str = 'hello http://www.cnn.com';
-    var urlRegEx = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-]*)?\??(?:[\-\+=&;%@\.\w]*)#?(?:[\.\!\/\\\w]*))?)/g;
-    result = str.replace(urlRegEx, "<a ng-click=\"GotoLink('$1',\'_system\')\">$1</a>");
-    $scope.GotoLink = function() {
-        alert();
-    };
-    $scope.name = result;
-})
+}])
+
+// .controller('MyCtrl', function($scope) {
+//     var str = 'hello http://www.cnn.com';
+//     var urlRegEx = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-]*)?\??(?:[\-\+=&;%@\.\w]*)#?(?:[\.\!\/\\\w]*))?)/g;
+//     result = str.replace(urlRegEx, "<a ng-click=\"GotoLink('$1',\'_system\')\">$1</a>");
+//     $scope.GotoLink = function() {
+//         alert();
+//     };
+//     $scope.name = result;
+// })
 
 // .directive('hideTabs', function($rootScope) {
 //   return {

@@ -1,9 +1,9 @@
-<ion-view view-title="{{ rss.name }}" hide-tabs>
+<ion-view view-title="{{ rss.name }}" hide-tabs ng-class="{true: 'background', false: ''}[settings.night]">
   <ion-content>
-    <ion-refresher pulling-text="Refresh" on-refresh="doRefresh(rss)"></ion-refresher>
+    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh(rss)" spinner="bubbles" ng-class="{true: 'refresh', false: ''}[settings.night]"></ion-refresher>
     <ion-item ng-repeat="article in articles track by article.link" ng-click="broadcast_article(article)" ui-sref="tab.article">
-      {{ article.title }}
-      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="article.pubDate"></ion-datetime>
+      <span ng-class="{true: 'light', false: ''}[settings.night]">{{ article.title }}</span>
+      <!-- <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="article.pubDate"></ion-datetime> -->
     </ion-item>
   </ion-content>
 </ion-view>
