@@ -26,18 +26,20 @@
   margin: 0px;
 }
 .sprite i{
-  height: 31.7px;
-  width: 31.7px;
+  height: 32px;
+  width: 32px;
+  border-radius: 16px;
   margin: 0px auto;
   display: block;
-  background-image: url("../img/icon/icon-bak.png");
+  background-image: url("../img/icon/FotorCreated.png");
 }
 .sprite-article i{
-  height: 44px;
-  width: 44px;
+  height: 39px;
+  width: 39px;
+  border-radius: 19.5px;
   margin: 0px auto;
   display: block;
-  background-image: url("../img/icon/wechat_sm.png");
+  background-image: url("../img/icon/share.png");
 }
 .add-label {
   height: 160px;

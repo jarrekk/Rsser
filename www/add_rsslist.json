@@ -1,5 +1,5 @@
 {
-    "version": 20160812,
+    "version": 20160811,
     "新闻": [{
         "id": 1,
         "img": "img/rss/ifeng.png",
@@ -131,6 +131,12 @@
         "type": "博客"
     },{
         "id": 3,
+        "img": "img/rss/yueguang.png",
+        "name": "月光博客",
+        "url": "http://feed.williamlong.info/",
+        "type": "博客"
+    },{
+        "id": 4,
         "img": "img/rss/jack003.png",
         "name": "jack003",
         "url": "http://www.jack003.com/feed.xml",
@@ -142,5 +148,18 @@
         "name": "Cinephilia",
         "url": "http://cinephilia.net/feed",
         "type": "图片"
+    }],
+    "游戏": [{
+        "id": 1,
+        "img": "img/rss/duowan.png",
+        "name": "多玩生活资讯",
+        "url": "http://www.toy-match.com/feed",
+        "type": "游戏"
+    },{
+        "id": 2,
+        "img": "img/rss/17173.png",
+        "name": "17173",
+        "url": "http://news.17173.com/rss/news.xml",
+        "type": "游戏"
     }]
 }
