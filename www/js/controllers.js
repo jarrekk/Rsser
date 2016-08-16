@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services', 'ngSanitize'])
 
-.controller('TourCtrl', function($scope) {
+.controller('TourCtrl', function($scope, $timeout) {
     $scope.slideChanged = function(index) {
         console.log(index);
         switch(index) {
@@ -10,6 +10,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
                 jQuery("#0-up").addClass('fadeInUp');
                 jQuery("#0-down").addClass('fadeInDown');
                 jQuery("#0-img").addClass('rotateIn');
+                $timeout(function() {
+                    $('#1-up, #1-down, #1-img').removeAttr('class').attr('class', '');
+                }, 500);
                 console.log('I am on slide 0');
                 break;
             case 1:
@@ -18,12 +21,19 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
                 $('#1-up').addClass('fadeInUp');
                 $('#1-down').addClass('fadeInDown');
                 $('#1-img').addClass('rotateIn');
+                $timeout(function() {
+                    jQuery("#0-up, #0-down, #0-img").removeAttr('class').attr('class', '');
+                    $('#2-up').removeAttr('class').attr('class', '');
+                }, 500);
                 console.log('I am on slide 1');
                 break;
             case 2:
                 $('#2-up').removeAttr('class').attr('class', '');
                 $('#2-up').addClass('animated');
                 $('#2-up').addClass('fadeInUp');
+                $timeout(function() {
+                    $('#1-up, #1-down, #1-img').removeAttr('class').attr('class', '');
+                }, 500);
                 console.log('I am on slide 2');
                 break;
         }
@@ -164,6 +174,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
             type: "get",
             timeout: 20000,
             cache: true,
+            ifModified: true,
             // async: false,
             url: url,
             dataType: "jsonp",
