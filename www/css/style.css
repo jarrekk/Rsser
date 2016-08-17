@@ -31,43 +31,36 @@
     margin: 0px auto;
     display: block;
 }
-
 .sprite-article {
     width: 32px;
     height: 32px;
     background-position: -5px -5px;
 }
-
 .sprite-blog {
     width: 32px;
     height: 32px;
     background-position: -47px -5px;
 }
-
 .sprite-game {
     width: 32px;
     height: 32px;
     background-position: -5px -47px;
 }
-
 .sprite-image {
     width: 32px;
     height: 32px;
     background-position: -47px -47px;
 }
-
 .sprite-manual {
     width: 32px;
     height: 32px;
     background-position: -89px -5px;
 }
-
 .sprite-news {
     width: 32px;
     height: 32px;
     background-position: -89px -47px;
 }
-
 .sprite-tech {
     width: 32px;
     height: 32px;
@@ -79,20 +72,16 @@
     display: block;
     margin: 0px auto;
 }
-
 .share-wechat {
     width: 50px;
     height: 50px;
     background-position: 0 0;
 }
-
 .share-wechat_moment {
     width: 50px;
     height: 50px;
     background-position: -50px 0;
 }
-
-
 .add-label {
   height: 160px;
 }
