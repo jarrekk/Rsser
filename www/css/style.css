@@ -25,32 +25,74 @@
   display: block;
   margin: 0px;
 }
-.sprite i{
-  height: 32px;
-  width: 32px;
-  border-radius: 16px;
-  border: 1px solid #444444;
-  margin: 0px auto;
-  display: block;
-  background-image: url("../img/icon/FotorCreated.png");
+.sprite {
+    background-image: url('../img/icon/spritesheet.png');
+    background-repeat: no-repeat;
+    margin: 0px auto;
+    display: block;
 }
-.sprite-w i{
-  height: 32px;
-  width: 32px;
-  border-radius: 16px;
-  border: 1px solid #ffffff;
-  margin: 0px auto;
-  display: block;
-  background-image: url("../img/icon/FotorCreated.png");
+
+.sprite-article {
+    width: 32px;
+    height: 32px;
+    background-position: -5px -5px;
 }
-.sprite-article i{
-  height: 39px;
-  width: 39px;
-  border-radius: 19.5px;
-  margin: 0px auto;
-  display: block;
-  background-image: url("../img/icon/share.png");
+
+.sprite-blog {
+    width: 32px;
+    height: 32px;
+    background-position: -47px -5px;
 }
+
+.sprite-game {
+    width: 32px;
+    height: 32px;
+    background-position: -5px -47px;
+}
+
+.sprite-image {
+    width: 32px;
+    height: 32px;
+    background-position: -47px -47px;
+}
+
+.sprite-manual {
+    width: 32px;
+    height: 32px;
+    background-position: -89px -5px;
+}
+
+.sprite-news {
+    width: 32px;
+    height: 32px;
+    background-position: -89px -47px;
+}
+
+.sprite-tech {
+    width: 32px;
+    height: 32px;
+    background-position: -5px -89px;
+}
+.share {
+    background-image: url('../img/icon/share_n.png');
+    background-repeat: no-repeat;
+    display: block;
+    margin: 0px auto;
+}
+
+.share-wechat {
+    width: 50px;
+    height: 50px;
+    background-position: 0 0;
+}
+
+.share-wechat_moment {
+    width: 50px;
+    height: 50px;
+    background-position: -50px 0;
+}
+
+
 .add-label {
   height: 160px;
 }
@@ -80,3 +122,4 @@ p.light {
 .landing-three {
   background: url('../img/landing/three.png');
 }
+.button h3 {margin: 5px auto;}

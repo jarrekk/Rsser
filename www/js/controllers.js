@@ -50,52 +50,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     $scope.myGoBack = function() {
         $ionicHistory.goBack();
     };
-    // $scope.$on('$ionicView.beforeLeave', function() {
-    //     // var currentView = $ionicHistory.currentView();
-    //     // console.log('ttt', currentView)
-    //     // var backView = $ionicHistory.backView();
-    //     // console.log('bbb', backView)
-    //     console.log('id', $ionicHistory.backView())
-    //     if ($ionicHistory.backView()) {
-    //         // $rootScope.backViewId = $ionicHistory.backView().viewId;
-    //         // console.log($rootScope.backViewId)
-    //     } else {
-    //         $rootScope.backView = $ionicHistory.currentView();
-    //     }
-    // });
-    // $scope.$on('$ionicView.enter', function() {
-    //     console.log('ccc', $ionicHistory.currentView())
-    //     if ($ionicHistory.currentView().backViewId) {
-    //     } else {
-    //         $ionicHistory.currentView().backViewId = $rootScope.backViewId;
-    //         console.log($ionicHistory.currentView())
-    //     }
-    //     if ($rootScope.backView) {
-    //         if ($ionicHistory.backView()) {} else {
-    //             $ionicHistory.backView().backViewId = $rootScope.backView.viewId;
-    //         }
-    //     }
-
-    //     console.log('bbb',$ionicHistory.backView());
-    // });
-    // $scope.customBack = function() {
-    //     console.log('<---- BACK');
-    //     //$ionicHistory.goBack();
-    //     var currentView = $ionicHistory.currentView();
-    //     var backView = $ionicHistory.backView();
-    //     console.log(currentView, backView)
-
-    //     if (backView) {
-    //         //there is a back view, go to it
-    //         if (currentView.stateName == backView.stateName) {
-    //             //if not works try to go doubleBack
-    //             var doubleBackView = $ionicHistory.getViewById(backView.backViewId);
-    //             $state.go(doubleBackView.stateName, doubleBackView.stateParams);
-    //         } else {
-    //             backView.go();
-    //         }
-    //     }
-    // }
     $scope.data = {
         "showReorder": false
     };
