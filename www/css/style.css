@@ -29,6 +29,16 @@
   height: 32px;
   width: 32px;
   border-radius: 16px;
+  border: 1px solid #444444;
+  margin: 0px auto;
+  display: block;
+  background-image: url("../img/icon/FotorCreated.png");
+}
+.sprite-w i{
+  height: 32px;
+  width: 32px;
+  border-radius: 16px;
+  border: 1px solid #ffffff;
   margin: 0px auto;
   display: block;
   background-image: url("../img/icon/FotorCreated.png");
@@ -51,7 +61,7 @@ p.light {
   color:rgb(255, 255, 255)
 }
 .img-border {
-  border-radius: 25px;
+  border-radius: 28px;
 }
 .refresh, .refresh .scroll-refresher, .refresh .ionic-refresher-content, .refresh .ionic-refresher-with-text, .refresh .spinner{
   color: #fff;

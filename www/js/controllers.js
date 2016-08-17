@@ -366,6 +366,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     });
 
     $scope.closeAddrss = function() {
+        $scope.add_rssData = {};
         $scope.add_rss_modal.hide();
     };
 

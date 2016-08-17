@@ -8,9 +8,11 @@
   <ion-content>
     <form ng-submit="show()" name="addRssForm">
       <div class="list">
-        <label class="item item-input">
+        <div class="item item-input">
+        <label class="col col-100">
           <input placeholder="Rss名称" type="text" ng-model="add_rssData.name" ng-style="settings.night === true && {'color':'white'}" required>
         </label>
+        </div>
         <div class="item item-input">
         <label class="col col-90">
           <input placeholder="Rss地址" type="text" ng-model="add_rssData.url" ng-style="settings.night === true && {'color':'white'}" required>

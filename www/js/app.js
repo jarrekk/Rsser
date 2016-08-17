@@ -1,10 +1,4 @@
-// Ionic Starter App
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform, $rootScope, $http, $state, Storage) {
@@ -18,7 +12,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             $state.go("tour");
         }
     });
-    // Storage.remove('save_traffic')
     if (Storage.get("settings")) {
         $rootScope.settings = Storage.get("settings");
     } else {
@@ -30,7 +23,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
     $rootScope.backButton = true;
     $rootScope.$on("$stateChangeSuccess", function(event, to, toParams, from, fromParams) {
-        // $rootScope.tab = to.data.no_tab;
         if ($state.current.name === 'tab.home' || $state.current.name === 'tab.add' || $state.current.name === 'tab.config') {
             $rootScope.hideTabs = false;
             $rootScope.backButton = true;
