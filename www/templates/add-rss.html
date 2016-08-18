@@ -9,15 +9,23 @@
     <form ng-submit="show()" name="addRssForm">
       <div class="list">
         <div class="item item-input">
-        <label class="col col-100">
+        <label class="col col-90">
           <input placeholder="Rss名称" type="text" ng-model="add_rssData.name" ng-style="settings.night === true && {'color':'white'}" required>
         </label>
+        <div class="col col-10">
+          <span class="ion-ios-close-outline" ng-class="{true: 'light', false: ''}[settings.night]" ng-show="add_rssData.name" ng-click="add_rssData.name=''"></span>
+        </div>
         </div>
         <div class="item item-input">
-        <label class="col col-90">
+        <label class="col col-80">
           <input placeholder="Rss地址" type="text" ng-model="add_rssData.url" ng-style="settings.night === true && {'color':'white'}" required>
         </label>
-          <span ng-click="scan_qr()"><i class="icon ion-qr-scanner" style="font-size: 22px;" ng-class="{true: 'icon-color', false: ''}[settings.night]"></i></span>
+        <div class="col col-10">
+        <span ng-click="scan_qr()"><i class="icon ion-qr-scanner" style="font-size: 22px;" ng-class="{true: 'light', false: ''}[settings.night]"></i></span>
+        </div>
+        <div class="col col-10">
+          <span class="ion-ios-close-outline" ng-class="{true: 'light', false: ''}[settings.night]" ng-show="add_rssData.url" ng-click="add_rssData.url=''"></span>
+        </div>
           </div>
         <label class="item">
           <button class="button button-block button-positive" type="submit" ng-disabled="addRssForm.$invalid">添加</button>
