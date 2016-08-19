@@ -3,7 +3,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
 .controller('TourCtrl', function($scope, $timeout) {
     $scope.slideChanged = function(index) {
         console.log(index);
-        switch(index) {
+        switch (index) {
             case 0:
                 jQuery("#0-up, #0-down, #0-img").removeAttr('class').attr('class', '');
                 jQuery("#0-up, #0-down, #0-img").addClass('animated');

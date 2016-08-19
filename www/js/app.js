@@ -1,4 +1,3 @@
-
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform, $rootScope, $http, $state, Storage) {
@@ -69,79 +68,78 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     // $ionicConfigProvider.views.swipeBackEnabled(true);
     $stateProvider
         .state('tour', {
-        url: '/tour',
-        templateUrl: 'templates/tour.html',
-        controller: 'TourCtrl'
-    })
-    .state('tab', {
-        url: '/tab',
-        abstract: true,
-        templateUrl: 'templates/tabs.html'
-    })
-    .state('tab.home', {
-        url: '/home',
-        views: {
-            'tab-home': {
-                templateUrl: 'templates/tab-home.html',
-                controller: 'HomeCtrl',
+            url: '/tour',
+            templateUrl: 'templates/tour.html',
+            controller: 'TourCtrl'
+        })
+        .state('tab', {
+            url: '/tab',
+            abstract: true,
+            templateUrl: 'templates/tabs.html'
+        })
+        .state('tab.home', {
+            url: '/home',
+            views: {
+                'tab-home': {
+                    templateUrl: 'templates/tab-home.html',
+                    controller: 'HomeCtrl',
+                }
             }
-        }
-    })
-    .state('tab.detail', {
-        url: '/detail?id',
-        views: {
-            'tab-home@tab': {
-                templateUrl: 'templates/tab-detail.html',
-                controller: 'DetailCtrl',
+        })
+        .state('tab.detail', {
+            url: '/detail?id',
+            views: {
+                'tab-home@tab': {
+                    templateUrl: 'templates/tab-detail.html',
+                    controller: 'DetailCtrl',
+                }
             }
-        }
-    })
-    .state('tab.article', {
-        url: '/article',
-        views: {
-            'tab-home@tab': {
-                templateUrl: 'templates/tab-article.html',
-                controller: 'ArticleCtrl',
+        })
+        .state('tab.article', {
+            url: '/article',
+            views: {
+                'tab-home@tab': {
+                    templateUrl: 'templates/tab-article.html',
+                    controller: 'ArticleCtrl',
+                }
             }
-        }
-    })
-    .state('tab.add', {
-        url: '/add',
-        views: {
-            'tab-add': {
-                templateUrl: 'templates/tab-add.html',
-                controller: 'AddRssCtrl',
+        })
+        .state('tab.add', {
+            url: '/add',
+            views: {
+                'tab-add': {
+                    templateUrl: 'templates/tab-add.html',
+                    controller: 'AddRssCtrl',
+                }
             }
-        }
-    })
-    .state('tab.add_rsslist', {
-        url: '/rsslist?category',
-        views: {
-            'tab-add@tab': {
-                templateUrl: 'templates/tab-add-rsslist.html',
-                controller: 'AddRsslistCtrl',
+        })
+        .state('tab.add_rsslist', {
+            url: '/rsslist?category',
+            views: {
+                'tab-add@tab': {
+                    templateUrl: 'templates/tab-add-rsslist.html',
+                    controller: 'AddRsslistCtrl',
+                }
             }
-        }
-    })
-    .state('tab.config', {
-        url: '/config',
-        views: {
-            'tab-config': {
-                templateUrl: 'templates/tab-config.html',
-                controller: 'ConfigCtrl',
+        })
+        .state('tab.config', {
+            url: '/config',
+            views: {
+                'tab-config': {
+                    templateUrl: 'templates/tab-config.html',
+                    controller: 'ConfigCtrl',
+                }
             }
-        }
-    })
-    .state('tab.about', {
-        url: '/about',
-        views: {
-            'tab-config@tab': {
-                templateUrl: 'templates/tab-about.html',
-                controller: 'AboutCtrl',
+        })
+        .state('tab.about', {
+            url: '/about',
+            views: {
+                'tab-config@tab': {
+                    templateUrl: 'templates/tab-about.html',
+                    controller: 'AboutCtrl',
+                }
             }
-        }
-    })
-    ;
+        });
     $urlRouterProvider.otherwise('/tab/home');
 
 })

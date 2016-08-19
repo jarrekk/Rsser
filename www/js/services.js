@@ -14,7 +14,7 @@ angular.module('starter.services', ['ngCordova'])
     };
 })
 
-.factory('rssUtils', function () {
+.factory('rssUtils', function() {
     return {
         findById: function findById(a, id) {
             for (var i = 0; i < a.length; i++) {
@@ -32,7 +32,7 @@ angular.module('starter.services', ['ngCordova'])
             return null;
         },
         editbyId: function editbyId(a, id, obj) {
-            for (var i = 0; i < a.length; i++){
+            for (var i = 0; i < a.length; i++) {
                 if (a[i].id == id) {
                     a[i] = obj;
                     return a;
