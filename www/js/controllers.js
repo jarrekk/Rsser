@@ -198,8 +198,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'starter.services',
     };
 
     $scope.favourite = function() {
-
-    }
+    };
 })
 
 .controller('ArticleCtrl', function($scope, $cordovaInAppBrowser, $ionicPopup, $ionicModal, $ionicLoading) {
